@@ -40,7 +40,7 @@ const validation= [body("email",'please Enter a valid Email').isEmail(), body("n
 router.post( "/signup",
   [validation],
   async (req, res)  => {
-    const errors = validationResult(req);
+    const errors = validatieonResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }

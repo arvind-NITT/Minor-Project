@@ -103,9 +103,10 @@ export default function Login() {
 			<div className="login" style={Style}>
 				{/* <form action="#" method="post"> */}
 					<label for="chk" aria-hidden="true" className='labelc' style={Style}>Login</label>
-
+          <input className='inputc' type="text" name="Name" placeholder="Name" onChange={Onchange} id="email" required="" style={Style}/>
 					<input className='inputc' type="email" name="email" placeholder="Email" onChange={Onchange} id="email" required="" style={Style}/>
 					<input className='inputc' type="password" onChange={Onchange} id="password" name='password' placeholder="Password" required="" style={Style}/>
+          
 					<button className='buttonc' onClick={onclickhandle} style={Style}>Login</button>
 					<button className='buttonc' onClick={onclickhandle2} style={Style}>Forgot password</button>
 				{/* </form> */}
@@ -119,6 +120,13 @@ export default function Login() {
 					<input className='inputc' type="text" name="name" placeholder="User name" onChange={Onchange} id="uname" required="" style={Style}/>
 					<input className='inputc'  type="email" name="email" onChange={Onchange} id="email" placeholder="Email" required="" style={Style}/>
 					<input className='inputc' type="password"onChange={Onchange} id="password" name='password' placeholder="Password" required="" style={Style}/>
+          <input className='inputc' type="password" onChange={Onchange} id="password" name='verified' placeholder="Retype" required="" style={Style}/>
+          <input className='inputc' type="text" name="collegeid" placeholder="College id" onChange={Onchange} id="uname" required="" style={Style}/>
+          <input className='inputc' type="text" name="Department" placeholder="Department name" onChange={Onchange} id="uname" required="" style={Style}/>
+          <input className='inputc' type="text" name="Mobileno" placeholder="Contact Number" onChange={Onchange} id="uname" required="" style={Style}/>
+
+
+
 					<button type="submit" className='buttonc' onClick={onclickhandle1} style={Style}>Sign up</button>
 					<button className='buttonc' type="submit"  style={Style}>
 						<Link  to="/verifyOtp">Verify Otp</Link>
