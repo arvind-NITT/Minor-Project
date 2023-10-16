@@ -1,0 +1,10 @@
+const express = require("express");
+const AuthenticateUser = require("../Authentication");
+const mongoose = require('mongoose');
+const User = require("../models/User");
+const router = express.Router();
+const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const jWT_SECRETE_CODE = "fINALLY WE CALL FROM COLLEGE";
+const ObjectId = mongoose.Types.ObjectId;
