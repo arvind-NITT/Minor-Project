@@ -10,7 +10,6 @@ export default function Login() {
   const Onchange=(e)=>{
     setUser({...user,[e.target.name]:e.target.value})
    console.log(user)
-   
   }
   const navigate = useNavigate();
   const onclickhandle2= async (e)=>{
@@ -46,7 +45,7 @@ export default function Login() {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify( {name:user.name,email:user.email,password:user.password} ),
+      body: JSON.stringify( {name:user.name,email:user.email,password:user.password,} ),
     })
     console.log(user);
     const token = await response.json();
@@ -76,7 +75,7 @@ export default function Login() {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify( {email:user.email,password:user.password} ),
+      body: JSON.stringify( {email:user.email,password:user.password,college_id:user.college_id,Department:user.Department,Mobile_number:user.Mobile_number,Role:user.Role} ),
     })
     const token = await response.json(); 
     // console.log(ret_data); 
@@ -120,7 +119,7 @@ export default function Login() {
 					<input className='inputc' type="text" name="name" placeholder="User name" onChange={Onchange} id="uname" required="" style={Style}/>
 					<input className='inputc'  type="email" name="email" onChange={Onchange} id="email" placeholder="Email" required="" style={Style}/>
 					<input className='inputc' type="password"onChange={Onchange} id="password" name='password' placeholder="Password" required="" style={Style}/>
-          <input className='inputc' type="password" onChange={Onchange} id="password" name='verified' placeholder="Retype" required="" style={Style}/>
+          {/* <input className='inputc' type="password" onChange={Onchange} id="password" name='verified' placeholder="Retype" required="" style={Style}/> */}
           <input className='inputc' type="text" name="college_id" placeholder="College id" onChange={Onchange} id="uname" required="" style={Style}/>
           <input className='inputc' type="text" name="Department" placeholder="Department name" onChange={Onchange} id="uname" required="" style={Style}/>
           <input className='inputc' type="text" name="Mobile_number" placeholder="Contact Number" onChange={Onchange} id="uname" required="" style={Style}/>
