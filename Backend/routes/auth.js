@@ -47,7 +47,7 @@ router.post( "/signup",
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      
+      console.log("IN signup section");
 
   let {name ,email , password,Role,college_id,Department,Mobile_number}= req.body;
   if(!email || !name || !password){
