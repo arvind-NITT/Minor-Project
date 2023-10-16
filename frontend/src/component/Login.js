@@ -121,10 +121,10 @@ export default function Login() {
 					<input className='inputc'  type="email" name="email" onChange={Onchange} id="email" placeholder="Email" required="" style={Style}/>
 					<input className='inputc' type="password"onChange={Onchange} id="password" name='password' placeholder="Password" required="" style={Style}/>
           <input className='inputc' type="password" onChange={Onchange} id="password" name='verified' placeholder="Retype" required="" style={Style}/>
-          <input className='inputc' type="text" name="collegeid" placeholder="College id" onChange={Onchange} id="uname" required="" style={Style}/>
+          <input className='inputc' type="text" name="college_id" placeholder="College id" onChange={Onchange} id="uname" required="" style={Style}/>
           <input className='inputc' type="text" name="Department" placeholder="Department name" onChange={Onchange} id="uname" required="" style={Style}/>
-          <input className='inputc' type="text" name="Mobileno" placeholder="Contact Number" onChange={Onchange} id="uname" required="" style={Style}/>
-
+          <input className='inputc' type="text" name="Mobile_number" placeholder="Contact Number" onChange={Onchange} id="uname" required="" style={Style}/>
+          <input className='inputc' type="text" name="Role" placeholder="Role" onChange={Onchange} id="uname" required="" style={Style}/>
 
 
 					<button type="submit" className='buttonc' onClick={onclickhandle1} style={Style}>Sign up</button>

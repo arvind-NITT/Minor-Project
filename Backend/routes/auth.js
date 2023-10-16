@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const express = require("express");
 const User = require("../models/User");
 const UserOtp = require("../models/Userotp");
@@ -411,3 +412,5 @@ async (req, res)  => {
 // password must be at least 5 chars long
 
 module.exports = router;
+=======
+>>>>>>> dcaa032c6478320b8e6e4a4aae238a0902fbff07
