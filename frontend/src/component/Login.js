@@ -45,7 +45,7 @@ export default function Login() {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify( {name:user.name,email:user.email,password:user.password,} ),
+      body: JSON.stringify( {name:user.name,email:user.email,password:user.password,college_id:user.college_id,Department:user.Department,Mobile_number:user.Mobile_number,Role:user.Role} ),
     })
     console.log(user);
     const token = await response.json();
@@ -75,7 +75,7 @@ export default function Login() {
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify( {email:user.email,password:user.password,college_id:user.college_id,Department:user.Department,Mobile_number:user.Mobile_number,Role:user.Role} ),
+      body: JSON.stringify( {email:user.email,password:user.password,Role:user.Role} ),
     })
     const token = await response.json(); 
     // console.log(ret_data); 
@@ -86,9 +86,11 @@ export default function Login() {
       localStorage.setItem('token',token.authtoken);
 
       setusername(user.email) 
+      console.log("success hora h ");
       navigate('/',{replace:true}); 
       showAlert("Login SuccessFully","success");
     }else{
+      console.log("danger error")
         showAlert(token.message,"danger")
       }
   }
