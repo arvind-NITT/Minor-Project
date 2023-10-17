@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Item= require('./Item')
 const { Schema } = mongoose;
 
 const Form1 = new Schema({
@@ -10,10 +10,10 @@ const Form1 = new Schema({
   },
   send_to:String,
   Date:String,
-  Approvedby:String,
-  Items:[Item],
+  // Approvedby:Boolean,
+  // Items:[Item],
   
 });
-const Form_1 = mongoose.model('Form1',UserSchema);
+const Form_1 = mongoose.model('Form1',Form1);
   
 module.exports= Form_1;

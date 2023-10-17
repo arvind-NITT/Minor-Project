@@ -54,7 +54,7 @@ export default function VerifyOtp() {
     if (token.success === true) {
       // localStorage.setItem('token',token.authtoken);
       // console.log(token.authtoken)
-      navigate('/upload_photo', { replace: true });
+      navigate('/login', { replace: true });
       showAlert("Account created Successfully Please Login Once ", "success")
     } else {
       showAlert(token.message, "danger")

@@ -94,19 +94,7 @@ router.post( "/signup",
             res.json({ success:false , message:message });
         })
     }})
-    //   const data =user.id;
-    //   const data ={
-    //       user:{
-    //           id:user.id
-    //         }
-    //       }
-    //       console.log(data);
-    //   const jwqt = jwt.sign(data,jWT_SECRETE_CODE); 
-    //   console.log(jwqt)
-    //   // .then(user => res.json(user)).catch(err=>{res.json({error:"This Email is already taken"})}) ;
-    // success=true
-    // console.log(req.body);
-    // res.send({'authtoken':jwqt,success});
+  
   }
     catch (error) {
       console.log("Something went wrong..");
