@@ -10,7 +10,7 @@ export default function Project_states(props){
           message: message,
           type: type,
         });
-     console.log(alert)
+     console.log("yaha aara hu ", alert);
         setTimeout(() => {
           setAlert(null);
         }, 2000);

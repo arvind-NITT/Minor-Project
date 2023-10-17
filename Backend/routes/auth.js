@@ -1,12 +1,14 @@
 const express = require("express");
 const User = require("../models/User");
 const UserOtp = require("../models/Userotp");
+
 const router = express.Router();
 const nodemailer= require("nodemailer");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const jWT_SECRETE_CODE = "fINALLY WE CALL FROM COLLEGE";
+
 
 let success= false;
 let transporter = nodemailer.createTransport({
@@ -45,20 +47,9 @@ router.post( "/signup",
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      
-  //  let found = await User.findOne({email:req.body.email});
-  //  if(found)
-  //  {
-  //   return res.status(400).json({message:"User Already exist"});
-  //  }
-  //  var salt = bcrypt.genSaltSync(10);
-  //  var SeccurePass = await bcrypt.hash(req.body.password,salt);
-  // const user =  await User.create({
-  //       name: req.body.name,
-  //       email:req.body.email,
-  //       password: SeccurePass,
-  //     })
-  let {name ,email , password}= req.body;
+      console.log("IN signup section");
+
+  let {name ,email , password,Role,college_id,Department,Mobile_number}= req.body;
   if(!email || !name || !password){
     // throw Error("Empty Details is not allowed");
     let  message = "Empty Details is not allowed";
@@ -79,6 +70,10 @@ router.post( "/signup",
          const user = new User({
                  name,
                  email,
+                 Role,
+                 college_id,
+                 Department,
+                 Mobile_number,
                  password : hashpassword,
                  verified :false,
             });
@@ -151,9 +146,6 @@ router.post( "/resetpassword",
           const update= await  User.findOneAndUpdate({email :email},{ $set : {"password":hashpassword}},{new: true});
           console.log(update,"update krra hu ");
           const del= await  UserOtp.deleteMany({userId:email});
-          // console.log(del);
-       //    let  message = "Your account is verified successfully";
-       //    let useremail=email
        res.json({ success:true});
         }).catch((err)=>{
             console.log(err);
@@ -239,10 +231,10 @@ router.post("/login",
       }
       const data ={
         found:{
-              email:found.email
+              id:found.id
             }
           }
-      console.log(data);
+          console.log(data);
       const jwqt = jwt.sign(data,jWT_SECRETE_CODE);
       console.log({'authtoken':jwqt})
       // .then(user => res.json(user)).catch(err=>{res.json({error:"This Email is already taken"})}) ;
@@ -291,7 +283,6 @@ router.post("/verifyOtp",async (req,res)=>{
                    console.log(validotp);
                    if(!validotp){
                       // throw new Error("Invalid Otp");
-                      console.log("Invalid Otp");
                       let  message = "Invalid Otp";
                       let useremail=email
                       res.json({  success:false, message,useremail: useremail });
