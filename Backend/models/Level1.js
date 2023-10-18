@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const Level1 = new Schema({
+const Level_1 = new Schema({
   Role:String,
   Department:String,
   FormId:{
@@ -11,6 +11,6 @@ const Level1 = new Schema({
   },
   Approved:Boolean
 });
-const Level_1 = mongoose.model('Level1',UserSchema);
+const Level1 = mongoose.model('Level_1',Level_1);
   
-module.exports= Level_1;
+module.exports= Level1;

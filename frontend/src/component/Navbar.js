@@ -20,8 +20,8 @@ export default function Navbar() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <div className="navbar-nav ms-auto py-0">
-                            <a href="index.html" className="nav-item nav-link active">Home</a>
-                            <a href="about.html" className="nav-item nav-link">About</a>
+                            <Link to="/" className="nav-item nav-link active">Home</Link>
+                            <a href="/" className="nav-item nav-link">About</a>
                             
                             <div className="nav-item dropdown">
                                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Forms</a>
@@ -34,8 +34,8 @@ export default function Navbar() {
                                     <a href="detail.html" className="dropdown-item">Form 5</a>
                                 </div>
                             </div>
-                            <a href="contact.html" className="nav-item nav-link">Contact</a>
-                            <a href="" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">Logout <i className="bi bi-arrow-right"></i></a>
+                            <a href="/" className="nav-item nav-link">Contact</a>
+                            <Link to="/login" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">login<i className="bi bi-arrow-right"></i></Link>
                         </div>
                     </div>
                 </nav>

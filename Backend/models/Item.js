@@ -9,6 +9,6 @@ const item = new Schema({
   Cost:Number,
   Total:Number
 });
-const Item = mongoose.model('item',UserSchema);
+const Item = mongoose.model('item',item);
   
 module.exports= Item;

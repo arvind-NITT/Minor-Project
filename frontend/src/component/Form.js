@@ -7,7 +7,10 @@ export default function Form() {
     const [items, setItems] = useState([
         { name: '', quantity: 0, price: 0, totalCost: 0 },
     ]);
-
+    const [formdata,setformdata]=useState(null);
+    const handlechangeonform=(e)=>{
+        setformdata({...formdata, [ e.target.value]:[e.target.name]});
+    }
     const handleItemChange = (index, key, value) => {
         const updatedItems = [...items];
         updatedItems[index][key] = value;
@@ -27,6 +30,34 @@ export default function Form() {
         const updatedItems = items.filter((_, i) => i !== index);
         setItems(updatedItems);
     };
+    const onclickhandle=async()=>{
+        let date= new Date();
+     let year = date.getFullYear();
+     let month= date.getMonth()+1;
+     let day= date.getUTCDate();
+     if(month<10)
+     month='0'+month;
+     let realdate= day+"/"+month+"/"+year;
+        const Url_to_submit = 'http://localhost:5000/api/tools/submitform'
+        const response = await fetch(Url_to_submit, {
+          method: 'POST', // or 'PUT'
+          headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            'auth-token':localStorage.getItem('token'),
+          },
+          body: JSON.stringify( {name:formdata.name,Items:items,Date:realdate,send_to:formdata.sendto} ),
+        })
+        const token = await response.json();
+        if(token.success==true){
+            console.log("Form submitted successfully");
+        }else{
+            console.log("Opps sorry");
+        }
+
+       
+      
+    }
     return (
         <>
 
@@ -48,29 +79,22 @@ export default function Form() {
                             <div className='row'>
                                 <div class=" form-group col-md-6 ">
                                     <label for="inputState" class="text-dark font-weight-bold form-label">Department Of </label>
-                                    <select id="inputState" class="border-dark rounded form-select ">
-                                        <option >Computer Application </option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
-                                        <option> Computer Science</option>
+                                    <select name='department' id="inputState" class="border-dark rounded form-select " onChange={handlechangeonform}>
+                                        <option value="CA" >Computer Application </option>
+                                      
 
                                     </select>
                                 </div>
                                 <div class=" form-group col-md-6">
                                     <label for="inputState" class="text-dark font-weight-bold form-label">Send To</label>
-                                    <select id="inputState" class="border-dark rounded form-select ">
-                                        <option >HOD</option>
+                                    <select name='sendto' id="inputState" class="border-dark rounded form-select " onChange={handlechangeonform}>
+                                        <option value="HOD"  >HOD</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName" name="name" placeholder="Your name" required />
+                                <input type="text" class="form-control" id="inputName" name="name" placeholder="Your name" required onChange={handlechangeonform}  />
                                 <small class="form-text text-muted">Please fill your name</small>
                             </div>
 
@@ -152,7 +176,7 @@ export default function Form() {
                                 <textarea class="form-control" name="remark" id="textAreaRemark" rows="2" placeholder="Tell us you want more..."></textarea>
                             </div> */}
 
-                            <button class="btn btn-success btn-block col-lg-2" type="submit">Submit</button>
+                            <button class="btn btn-success btn-block col-lg-2" type="submit" onClick={onclickhandle}>Submit</button>
 
                         </form>
 
