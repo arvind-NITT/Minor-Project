@@ -9,7 +9,7 @@ export default function Form() {
     ]);
     const [formdata,setformdata]=useState(null);
     const handlechangeonform=(e)=>{
-        setformdata({...formdata, [ e.target.value]:[e.target.name]});
+        setformdata({...formdata, [ e.target.name]:[e.target.value]});
     }
     const handleItemChange = (index, key, value) => {
         const updatedItems = [...items];
@@ -45,7 +45,7 @@ export default function Form() {
     if (totalAmount > 25000) {
           alert('Total amount exceeds 25,000. Form cannot be submitted.');
     }else{
-        let date= new Date();
+        let date= new Date(); 
      let year = date.getFullYear();
      let month= date.getMonth()+1;
      let day= date.getUTCDate();

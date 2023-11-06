@@ -27,6 +27,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
   let newform= new Form1({
     File_no:fileno,
     user,
+    name,
     // Items,
     Date,
     send_to
@@ -53,6 +54,12 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
    }
    
    await newtimeline.save();
+   let newlevel1= new Level1({
+    Role,
+    Department,
+    FormId:result._id,
+    Approved:false,
+   })
    console.log("form save ho gaya");
     res.json({success:true})
 }).catch((err)=>{
