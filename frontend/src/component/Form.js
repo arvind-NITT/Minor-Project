@@ -47,7 +47,7 @@ export default function Form() {
     if (totalAmount > 25000) {
           alert('Total amount exceeds 25,000. Form cannot be submitted.');
     }else{
-        let date= new Date();
+        let date= new Date(); 
      let year = date.getFullYear();
      let month= date.getMonth()+1;
      let day= date.getUTCDate();
@@ -211,3 +211,4 @@ export default function Form() {
         </>
     )
 }
+ 

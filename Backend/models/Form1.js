@@ -10,10 +10,6 @@ const Form1 = new Schema({
   },
   send_to:String,
   Date:String,
-
-  // Approvedby:Boolean,
-  // Items:[Item],
-  
 });
 const Form_1 = mongoose.model('Form1',Form1);
   

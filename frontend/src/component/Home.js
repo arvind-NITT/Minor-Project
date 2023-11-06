@@ -9,8 +9,8 @@ const usersData = [
   { id: 3, fileNumber: '003', formName: 'Form C', status: 'Rejected' },
 ];
 const timelineData1 = [
-  { title: 'Initialized By faculty ', status: 'Processing' },
-  { title: 'HOD Approval ', status: 'Success' },
+  { title: 'Initialized By faculty', status: 'Processing' },
+  { title: 'HOD Approval', status: 'Success' },
   { title: 'Dean Approval ', status: 'Pending' },
   // Add more data as needed
 ];

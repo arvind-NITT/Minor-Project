@@ -19,7 +19,7 @@ const File_no="CA2023";
 router.post("/submitform",AuthenticateUser,async (req, res) => {
   console.log("In form submittion....")
    let user=req.user.found.id;
-  let { Items ,name, Approvedby,Date,send_to}= req.body;
+  let { Items ,name,department, Approvedby,Date,send_to}= req.body;
   console.log(req.body);
    let count=1;
    let fileno=File_no + count;
@@ -27,6 +27,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
   let newform= new Form1({
     File_no:fileno,
     user,
+    name,
     // Items,
     Date,
     send_to
@@ -53,6 +54,13 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
    }
    
    await newtimeline.save();
+   let newlevel1= new Level1({
+    Role:send_to,
+    Department:department, 
+    FormId:result._id,
+    Approved:false,
+   })
+   await newlevel1.save();
    console.log("form save ho gaya");
     res.json({success:true})
 }).catch((err)=>{
@@ -64,13 +72,31 @@ res.json({ success:false,  message:message });
 
 });
 
+// router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
+    
+//     res.send({AllForms});
+//   });
+
 router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     // const{ Role, Department}=req.body;
     const AllForms = await Form1.find({ user: req.user.found.id });
-    console.log(AllForms);
+    // var forms=[];
+    // for(let i=0;i<AllForms.length;i++){
+       
+    // }
 
-    res.send({AllForms});
+    
+    const fromapp=[];
+    // = await Level1.find({})
+    for(let i=0;i<AllForms.length;i++){
+        var timeline= await Timeline.find({ FormId: AllForms[i]._id });
+        fromapp.push(timeline);
+    }
+
+    console.log(AllForms);
+    
+    res.send({AllForms,fromapp});
   });
 router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
@@ -104,5 +130,6 @@ router.put("/approved/level1", AuthenticateUser,async (req,res)=>{
      res.json({data});
   }
 })
+
 
 module.exports = router;
