@@ -4,6 +4,10 @@ import "./style.css";
 import logo from "../images/NITT_logo.png";
 import { Link } from 'react-router-dom';
 export default function Navbar() {
+    const logout=()=>{ 
+        localStorage.removeItem('token');
+         
+    }
     return (
         <div>
             <div className="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
@@ -36,6 +40,7 @@ export default function Navbar() {
                             </div>
                             <a href="/" className="nav-item nav-link">Contact</a>
                             <Link to="/login" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">login<i className="bi bi-arrow-right"></i></Link>
+                            <Link className='nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block' to='/login' onClick={logout}>Logout</Link>
                         </div>
                     </div>
                 </nav>
