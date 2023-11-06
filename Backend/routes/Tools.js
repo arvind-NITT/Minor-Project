@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require("../models/User");
 const Form1 = require("../models/Form1");
 const Level1 = require("../models/Level1");
+const Item = require("../models/Item");
 const Timeline = require("../models/Timeline");
 
 
@@ -14,26 +15,43 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jWT_SECRETE_CODE = "fINALLY WE CALL FROM COLLEGE";
 const ObjectId = mongoose.Types.ObjectId;
-
+const File_no="CA2023";
 router.post("/submitform",AuthenticateUser,async (req, res) => {
   console.log("In form submittion....")
    let user=req.user.found.id;
-  let { Items , Approvedby,Date,send_to}= req.body;
-  let File_no=1;
+  let { Items ,name, Approvedby,Date,send_to}= req.body;
+  console.log(req.body);
+   let count=1;
+   let fileno=File_no + count;
+   console.log(Items);
   let newform= new Form1({
-    File_no,
+    File_no:fileno,
     user,
     // Items,
     Date,
     send_to
   })
  await newform.save().then(async (result)=>{
+  console.log(result);
    let newtimeline=new Timeline({
     FormId: result._id,
     Approved0:true,
     Approved1:false,
     Approved2:false
    })
+   for(let i =0 ;i<Items.length;i++){
+               let newitem= new Item({
+                FormId:result._id,
+                S_No:i+1,
+                Name:Items[i].name,
+                Quantity:Items[i].quantity,
+                Cost:Items[i].price,
+                Total:Items[i].quantity*Items[i].price
+                }
+               )
+              await newitem.save();
+   }
+   
    await newtimeline.save();
    console.log("form save ho gaya");
     res.json({success:true})
