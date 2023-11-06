@@ -32,8 +32,8 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     send_to
   })
  await newform.save().then(async (result)=>{
-  console.log(result);
-   let newtimeline=new Timeline({
+    console.log(result);
+    let newtimeline=new Timeline({
     FormId: result._id,
     Approved0:true,
     Approved1:false,
