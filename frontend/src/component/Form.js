@@ -47,7 +47,7 @@ export default function Form() {
     if (totalAmount > 25000) {
           alert('Total amount exceeds 25,000. Form cannot be submitted.');
     }else{
-        let date= new Date();
+        let date= new Date(); 
      let year = date.getFullYear();
      let month= date.getMonth()+1;
      let day= date.getUTCDate();
@@ -62,7 +62,7 @@ export default function Form() {
             "Access-Control-Allow-Origin": "*",
             'auth-token':localStorage.getItem('token'),
           },
-          body: JSON.stringify( {name:formdata.name,Items:items,Date:realdate,send_to:formdata.sendto} ),
+          body: JSON.stringify( {name:formdata.name,department:items.department ,Items:items,Date:realdate,send_to:formdata.sendto} ),
         })
         const token = await response.json();
         if(token.success==true){
@@ -209,3 +209,4 @@ export default function Form() {
         </>
     )
 }
+ 
