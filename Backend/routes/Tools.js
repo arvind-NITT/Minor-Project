@@ -19,7 +19,7 @@ const File_no="CA2023";
 router.post("/submitform",AuthenticateUser,async (req, res) => {
   console.log("In form submittion....")
    let user=req.user.found.id;
-  let { Items ,name, Approvedby,Date,send_to}= req.body;
+  let { Items ,name,department, Approvedby,Date,send_to}= req.body;
   console.log(req.body);
    let count=1;
    let fileno=File_no + count;
@@ -55,8 +55,8 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
    
    await newtimeline.save();
    let newlevel1= new Level1({
-    Role,
-    Department,
+    Role:send_to,
+    Department:department, 
     FormId:result._id,
     Approved:false,
    })
