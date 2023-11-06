@@ -4,10 +4,6 @@ import React, { useState, useEffect } from "react";
 export default function Project_states(props) {
   const [username, setusername] = useState("");
   const [alert, setAlert] = useState(null);
-  const [formname, setFormname] = useState("");
-  const [formnumber, setFormnumber] = useState("");
-  const [status, setStatus] = useState("");
-
   const showAlert = (message, type) => {
     setAlert({
       message: message,
@@ -21,12 +17,17 @@ export default function Project_states(props) {
 
   const fetchDataFromBackend = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/tools/FetchFormsforlevel0"); // Replace with your actual API URL
+      const response = await fetch("http://localhost:5000/api/tools/FetchFormsforlevel0",{
+        method: "GET", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", 
+          "auth-token": localStorage.getItem("token"),
+        },
+      }); // Replace with your actual API URL
       if (response.ok) {
         const data = await response.json();
-        setFormname(data.formname);
-        setFormnumber(data.formnumber);
-        setStatus(data.status);
+        console.log(data);
       } else {
         showAlert("Failed to fetch data from the backend", "error");
       }
@@ -36,18 +37,12 @@ export default function Project_states(props) {
     }
   };
 
-  useEffect(() => {
-    fetchDataFromBackend(); // Fetch data when the component mounts
-  }, []);
-
   return (
     <ProjectContext.Provider
       value={{
         username,
         setusername,
-        formname,
-        formnumber,
-        status,
+        
         showAlert,
         alert,
       }}
@@ -57,50 +52,71 @@ export default function Project_states(props) {
   );
 }
 
-// import ProjectContext from "./Contexts";
-// import React, { useState } from "react";
-// // import { useNavigate } from "react-router-dom
-// export default function Project_states(props){
-//     const [username, setusername] = useState("");
-//     const [alert, setAlert] = useState(null);
-//     const showAlert = (message, type) => {
-//         console.log("show alert called");
-//         setAlert({
-//           message: message,
-//           type: type,
-//         });
-//      console.log("yaha aara hu ", alert);
-//         setTimeout(() => {
-//           setAlert(null);
-//         }, 2000);
-//       };  
-//       const setup = async () => { 
-//         const url = "http://localhost:5000/api/tools/sorteddata";
-//         const response = await fetch(url, {
-//           method: "GET", // *GET, POST, PUT, DELETE, etc.
-//           headers: {
-//             "Content-Type": "application/json",
-//             "Access-Control-Allow-Origin": "*", 
-//             "auth-token": localStorage.getItem("token"),
-//           },
-//         });
-//         const startup = await response.json();
 
+// import ProjectContext from "./Contexts";
+// import React, { useState, useEffect } from "react";
+
+// export default function Project_states(props) {
+//   const [username, setusername] = useState("");
+//   const [alert, setAlert] = useState(null);
+//   const [formData, setFormData] = useState([]); // State to store form data
+
+//   const showAlert = (message, type) => {
+//     setAlert({
+//       message: message,
+//       type: type,
+//     });
+
+//     setTimeout(() => {
+//       setAlert(null);
+//     }, 2000);
+//   };
+
+//   const fetchDataFromBackend = async () => {
+//     try {
+//       const response = await fetch("http://localhost:5000/api/tools/FetchFormsforlevel0", {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Access-Control-Allow-Origin": "*",
+//           "auth-token": localStorage.getItem("token"),
+//         },
+//       });
+
+//       if (response.ok) {
+//         const data = await response.json();
+//         // Extract the relevant data from the response and format it as needed
+//         const formattedData = data.AllForms.map((form) => ({
+//           Date: form.Date,
+//           File_no: form.File_no,
+//           send_to: form.send_to,
+//         }));
+//         setFormData(formattedData);
+//       } else {
+//         showAlert("Failed to fetch data from the backend", "error");
 //       }
-//       return ( 
-//         <ProjectContext.Provider
-//           value={{
-           
-//             username,
-//             setusername,
-//             startup,
-           
-//             showAlert,
-//             alert
-//           }}
-//         >
-//           {props.children}
-//         </ProjectContext.Provider>
-//       );
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//       showAlert("An error occurred while fetching data", "error");
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchDataFromBackend();
+//   }, []);
+
+//   return (
+//     <ProjectContext.Provider
+//       value={{
+//         username,
+//         setusername,
+//         formData, // Provide the formData in the context
+//         showAlert,
+//         alert,
+//       }}
+//     >
+//       {props.children}
+//     </ProjectContext.Provider>
+//   );
 // }
- 
+

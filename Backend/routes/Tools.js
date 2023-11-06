@@ -80,7 +80,7 @@ res.json({ success:false,  message:message });
 router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     // const{ Role, Department}=req.body;
-    const AllForms = await Form1.find({ user: req.user.found.id }).projection({File_no:1,_id:1});
+    const AllForms = await Form1.find({ user: req.user.found.id });
     // var forms=[];
     // for(let i=0;i<AllForms.length;i++){
        
