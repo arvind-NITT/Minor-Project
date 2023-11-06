@@ -60,6 +60,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     FormId:result._id,
     Approved:false,
    })
+   await newlevel1.save();
    console.log("form save ho gaya");
     res.json({success:true})
 }).catch((err)=>{
@@ -71,13 +72,31 @@ res.json({ success:false,  message:message });
 
 });
 
+// router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
+    
+//     res.send({AllForms});
+//   });
+
 router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     // const{ Role, Department}=req.body;
-    const AllForms = await Form1.find({ user: req.user.found.id });
-    console.log(AllForms);
+    const AllForms = await Form1.find({ user: req.user.found.id }).projection({File_no:1,_id:1});
+    // var forms=[];
+    // for(let i=0;i<AllForms.length;i++){
+       
+    // }
 
-    res.send({AllForms});
+    
+    const fromapp=[];
+    // = await Level1.find({})
+    for(let i=0;i<AllForms.length;i++){
+        var timeline= await Timeline.find({ FormId: AllForms[i]._id });
+        fromapp.push(timeline);
+    }
+
+    console.log(AllForms);
+    
+    res.send({AllForms,fromapp});
   });
 router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
@@ -111,5 +130,6 @@ router.put("/approved/level1", AuthenticateUser,async (req,res)=>{
      res.json({data});
   }
 })
+
 
 module.exports = router;
