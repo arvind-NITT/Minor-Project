@@ -66,6 +66,8 @@ export default function Form() {
         })
         const token = await response.json();
         if(token.success==true){
+            alert("Form Submitted Successfully");
+            
             console.log("Form submitted successfully");
         }else{
             console.log("Opps sorry");
