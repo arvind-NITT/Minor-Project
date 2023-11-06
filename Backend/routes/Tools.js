@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const User = require("../models/User");
 const Form1 = require("../models/Form1");
 const Level1 = require("../models/Level1");
+const Item = require("../models/Item");
 const Timeline = require("../models/Timeline");
 
 
@@ -18,12 +19,13 @@ const File_no="CA2023";
 router.post("/submitform",AuthenticateUser,async (req, res) => {
   console.log("In form submittion....")
    let user=req.user.found.id;
-  let { Items , Approvedby,Date,send_to}= req.body;
+  let { Items ,name, Approvedby,Date,send_to}= req.body;
+  console.log(req.body);
    let count=1;
    let fileno=File_no + count;
-   
+   console.log(Items);
   let newform= new Form1({
-    fileno,
+    File_no:fileno,
     user,
     // Items,
     Date,
@@ -37,6 +39,18 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     Approved1:false,
     Approved2:false
    })
+   for(let i =0 ;i<Items.length;i++){
+               let newitem= new Item({
+                FormId:result._id,
+                S_No:i+1,
+                Name:Items[i].name,
+                Quantity:Items[i].quantity,
+                Cost:Items[i].price,
+                Total:Items[i].quantity*Items[i].price
+                }
+               )
+              await newitem.save();
+   }
    
    await newtimeline.save();
    console.log("form save ho gaya");
