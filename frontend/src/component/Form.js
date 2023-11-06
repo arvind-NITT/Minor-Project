@@ -9,7 +9,9 @@ export default function Form() {
     ]);
     const [formdata,setformdata]=useState(null);
     const handlechangeonform=(e)=>{
-        setformdata({...formdata, [ e.target.name]:[e.target.value]});
+
+        setformdata({...formdata, [ e.target.name]:e.target.value});
+        console.log(formdata)
     }
     const handleItemChange = (index, key, value) => {
         const updatedItems = [...items];
@@ -93,15 +95,17 @@ export default function Form() {
                             <div className='row'>
                                 <div class=" form-group col-md-6 ">
                                     <label for="inputState" class="text-dark font-weight-bold form-label">Department Of </label>
-                                    <select name='department' id="inputState" class="border-dark rounded form-select " onChange={handlechangeonform}>
+                                    <select name='department' id="inputState" class="border-dark rounded form-select " onChange={handlechangeonform} >
+                                    <option value="">Select an option</option>
                                         <option value="CA" >Computer Application </option>
-                                      
+                                        
 
                                     </select>
                                 </div>
                                 <div class=" form-group col-md-6">
                                     <label for="inputState" class="text-dark font-weight-bold form-label">Send To</label>
                                     <select name='sendto' id="inputState" class="border-dark rounded form-select " onChange={handlechangeonform}>
+                                    <option value="">Select an option</option>
                                         <option value="HOD"  >HOD</option>
                                     </select>
                                 </div>
