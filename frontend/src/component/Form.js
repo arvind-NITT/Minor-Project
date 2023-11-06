@@ -30,7 +30,21 @@ export default function Form() {
         const updatedItems = items.filter((_, i) => i !== index);
         setItems(updatedItems);
     };
-    const onclickhandle=async()=>{
+    const calculateTotalAmount = () => {
+        let totalAmount = 0;
+        items.forEach((item) => {
+          totalAmount += item.totalCost;
+        });
+        return totalAmount;
+      };
+      
+    const onclickhandle=async(e)=>{
+        e.preventDefault();
+    const totalAmount = calculateTotalAmount(); // Calculate the total amount
+
+    if (totalAmount > 25000) {
+          alert('Total amount exceeds 25,000. Form cannot be submitted.');
+    }else{
         let date= new Date();
      let year = date.getFullYear();
      let month= date.getMonth()+1;
@@ -55,7 +69,7 @@ export default function Form() {
             console.log("Opps sorry");
         }
 
-       
+    } 
       
     }
     return (
@@ -75,7 +89,7 @@ export default function Form() {
 
                 <div class="card ">
                     <div className="card-body table-responsive">
-                        <form id="bookingForm" action="#" method="" class="needs-validation" novalidate autocomplete="off">
+                        <form id="bookingForm" action="#" method="" class="needs-validation" autocomplete="off" onSubmit={onclickhandle}>
                             <div className='row'>
                                 <div class=" form-group col-md-6 ">
                                     <label for="inputState" class="text-dark font-weight-bold form-label">Department Of </label>
@@ -167,7 +181,9 @@ export default function Form() {
 
 
                             <hr />
-
+                            <div className="text-end">
+                                <strong>Total Amount: {calculateTotalAmount()}</strong>
+                            </div>
 
 
 
@@ -176,7 +192,7 @@ export default function Form() {
                                 <textarea class="form-control" name="remark" id="textAreaRemark" rows="2" placeholder="Tell us you want more..."></textarea>
                             </div> */}
 
-                            <button class="btn btn-success btn-block col-lg-2" type="submit" onClick={onclickhandle}>Submit</button>
+                            <button class="btn btn-success btn-block col-lg-2" type="submit" >Submit</button>
 
                         </form>
 
