@@ -7,9 +7,7 @@ const Level1 = require("../models/Level1");
 const Item = require("../models/Item");
 const Timeline = require("../models/Timeline");
 const File_Number = require("../models/FileId");
-// const = re
-
-
+   
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
@@ -109,11 +107,11 @@ router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     const{ Role, Department}=usersdetails[0];
     // const AllForms = await Form1.find({ user: req.user.found.id });
     // const
-    const Level1Forms= await Level1.find({Role:Role,Department:Department});
-    // console.log(AllForms);
-    console.log(Level1Forms);
+    // const Level1Forms= await Level1.find({Role:Role,Department:Department});
+    // // console.log(AllForms);
+    // console.log(Level1Forms);
 
-    res.send({Level1Forms});
+    res.send({usersdetails});
   });
 router.put("/approved/level0", AuthenticateUser,async (req,res)=>{
   const {Role,Department,FormId}= req.body;
@@ -128,14 +126,14 @@ router.put("/approved/level0", AuthenticateUser,async (req,res)=>{
 })
 router.put("/approved/level1", AuthenticateUser,async (req,res)=>{
   const {Role,Department,FormId}= req.body;
-  let Level1Forms= await Level1.find({Role:Role,Department:Department,FormId:ObjectId(FormId)});
+  let Level1Forms= await Level1.find({Role:Role,Department:Department});
   if(!Level1Forms){
     res.json({"error":"Form not Found"});
-  }else{
+  }else{ 
      let data= await Level1.findOneAndUpdate({FormId:FormId},{$set :{Approvedby:true}},{new:true});
      res.json({data});
-  }
-})
-
+  } 
+})  
+ 
 
 module.exports = router;
