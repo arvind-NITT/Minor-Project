@@ -6,7 +6,8 @@ const Form1 = require("../models/Form1");
 const Level1 = require("../models/Level1");
 const Item = require("../models/Item");
 const Timeline = require("../models/Timeline");
-
+const File_Number = require("../models/FileId");
+// const = re
 
 
 const router = express.Router();
@@ -20,10 +21,14 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
   console.log("In form submittion....")
    let user=req.user.found.id;
   let { Items ,name,department, Approvedby,Date,send_to}= req.body;
-  console.log(req.body);
-   let count=1;
-   let fileno=File_no + count;
-   console.log(Items);
+  // console.log(req.body);
+   
+
+  const File_id = await File_Number.find();  
+  console.log(File_id);
+  let count=File_id[0].File_no + 1;
+   let fileno=  "NITTCA2023_" + count ;
+  //  console.log(Items);
   let newform= new Form1({
     File_no:fileno,
     user,
@@ -33,7 +38,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     send_to
   })
  await newform.save().then(async (result)=>{
-    console.log(result);
+    // console.log(result);
     let newtimeline=new Timeline({
     FormId: result._id,
     Approved0:true,
@@ -60,6 +65,9 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     FormId:result._id,
     Approved:false,
    })
+   let id=File_id[0]._id;
+   let data= await File_Number.findOneAndUpdate({_id:id},{$set :{File_no:1+count}},{new:true});
+   console.log(data);
    await newlevel1.save();
    console.log("form save ho gaya");
     res.json({success:true})
@@ -80,13 +88,7 @@ res.json({ success:false,  message:message });
 router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     // const{ Role, Department}=req.body;
-    const AllForms = await Form1.find({ user: req.user.found.id });
-    // var forms=[];
-    // for(let i=0;i<AllForms.length;i++){
-       
-    // }
-
-    
+    const AllForms = await Form1.find({ user: req.user.found.id });    
     const fromapp=[];
     // = await Level1.find({})
     for(let i=0;i<AllForms.length;i++){
