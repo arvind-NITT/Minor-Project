@@ -92,8 +92,9 @@ router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
     for(let i=0;i<AllForms.length;i++){
         var timeline= await Timeline.find({ FormId: AllForms[i]._id });
         fromapp.push(timeline);
+       
     }
-
+    console.log(fromapp);
     console.log(AllForms);
     
     res.send({AllForms,fromapp});

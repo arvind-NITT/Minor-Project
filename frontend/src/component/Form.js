@@ -2,8 +2,9 @@ import React from 'react'
 import "./bootstrap.min.css";
 import logo from "../images/NITT_logo.jpeg";
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 export default function Form() {
+    const navigate = useNavigate();
     const [items, setItems] = useState([
         { name: '', quantity: 0, price: 0, totalCost: 0 },
     ]);
@@ -66,7 +67,10 @@ export default function Form() {
         })
         const token = await response.json();
         if(token.success==true){
+            alert("Form Submitted Successfully");
+            
             console.log("Form submitted successfully");
+            navigate('/');
         }else{
             console.log("Opps sorry");
         }
@@ -170,7 +174,7 @@ export default function Form() {
                                             <td className="table-warning">
                                                 <div className="form-floating">
                                                     <div class="form-group m-1">
-                                                        <button className='btn btn-danger' onClick={() => deleteItem(index)} disabled={items.length === 1}>
+                                                        <button type="button" className='btn btn-danger' onClick={() => deleteItem(index)} disabled={items.length === 1}>
                                                             Delete
                                                         </button>
                                                     </div>
@@ -180,7 +184,7 @@ export default function Form() {
                                     ))}
                                 </tbody>
                             </table>
-                            <button className="btn btn-success" onClick={addNewItem}>Add Item</button>
+                            <button className="btn btn-success" type="button" onClick={addNewItem}>Add Item</button>
 
 
 
