@@ -18,6 +18,11 @@ export default function Home() {
     setSelectedUser(user);
     console.log(selectedUser);
   };
+  const getStatus = (selectedUser) => {
+   if(selectedUser.Approved0 && selectedUser.Approved1)
+   return "Approved" 
+    return "Pending"; // Default to 'No Status' if status is not available
+  };
   const divStyle = {
     minHeight: '80vh',
   };
@@ -40,7 +45,7 @@ export default function Home() {
               <tr key={user.File_no}>
                 <td>{user.File_no}</td>
                 <td>{user.Date}</td>
-                <td>{user.send_to}</td>
+                <td>{getStatus(user)}</td>
                 <td>
                   <button
                     className="btn btn-primary"
@@ -69,7 +74,7 @@ export default function Home() {
                 </tr>
                 <tr>
                   <th>Status:</th>
-                  <td>{selectedUser.send_to}</td>
+                  <td>{getStatus(selectedUser)}</td>
                 </tr>
                 <tr>
                   <th>View Timeline:</th>

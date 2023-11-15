@@ -87,6 +87,7 @@ export default function Login() {
 
       setusername(user.email) 
       console.log("success hora h ");
+      console.log(token);
       navigate('/',{replace:true}); 
       showAlert("Login SuccessFully","success");
     }else{

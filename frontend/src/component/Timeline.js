@@ -2,8 +2,8 @@
 import "./timeline.css";
 
 const getStatus = (title,data) => {
-  if (data.Approved0 && data.Approved1 && data.Approved2) {
-    return "Approved";
+  if (data.Approved0) {
+    return "Initiated";
   } else if (title=="Initiated by you") {
     return "Pending";
   }else if(title="HOD Approval"){
@@ -35,7 +35,7 @@ const Timeline = ({ data }) => (
     <div className="outer">
       <TimelineItem title="Initiated by you" data={data} />
       <TimelineItem title="HOD Approval" data={data} />
-      <TimelineItem title="Dean Approval" data={data} />
+      {/* <TimelineItem title="Dean Approval" data={data} /> */}
     </div>
   </div>
 );

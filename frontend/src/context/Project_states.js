@@ -72,7 +72,32 @@ export default function Project_states(props) {
       setAlert(null);
     }, 2000);
   };
-
+  const fetchHodData=async()=>{
+    try {
+      const response = await fetch("http://localhost:5000/api/tools/FetchFormsforlevel1", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "auth-token": localStorage.getItem("token"),
+        },
+        body:{
+          "Role":"HOD",
+          "Department":"CA",
+        },
+      });
+      if(response.ok){
+        const data = await response.json();
+        console.log(data);
+      }
+      else {
+        showAlert("Failed to fetch data from the backend", "error");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      showAlert("An error occurred while fetching data", "error");
+    }
+  };
   const fetchDataFromBackend = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/tools/FetchFormsforlevel0", {
@@ -115,6 +140,7 @@ export default function Project_states(props) {
         username,
         setusername,
         fetchDataFromBackend,
+        fetchHodData,
         timeline,
         setTimeline,
         setFormData,
