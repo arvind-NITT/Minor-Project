@@ -223,8 +223,16 @@ router.post("/login",
       //       }
       //     }
       //     console.log(data);
-      const jwqt = jwt.sign(
-        {id:found.id, Name: found.name, Role:found.Role,Department:found.Department },jWT_SECRETE_CODE);
+      console.log(found);
+      const data = {
+        found: {
+          id: found.id,
+          name: found.name, // Add the 'name' field
+          department: found.Department, // Add the 'department' field
+          role: found.Role, // Add the 'role' field
+        },
+      };
+      const jwqt = jwt.sign(data,jWT_SECRETE_CODE);
       console.log({'authtoken':jwqt})
       // .then(user => res.json(user)).catch(err=>{res.json({error:"This Email is already taken"})}) ;
     success=true;

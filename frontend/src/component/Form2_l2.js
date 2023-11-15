@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import "./bootstrap.min.css";
 import logo from "../images/NITT_logo.jpeg";
-
+import Navbar from './Navbar';
+import Footer from './Footer';
 function Form1_l2() {
     const [formData, setFormData] = useState({
         date: '',
@@ -121,6 +122,7 @@ function Form1_l2() {
 
     return (
         <div>
+          <Navbar></Navbar>
             <div className='container mt-5 mb-5 p-3 border border-dark border-3'>
 
                 <div className="text-center pt-5 ">
@@ -573,6 +575,7 @@ function Form1_l2() {
                     </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 }

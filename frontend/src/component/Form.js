@@ -3,6 +3,8 @@ import "./bootstrap.min.css";
 import logo from "../images/NITT_logo.jpeg";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import Footer from './Footer';
 export default function Form() {
     const navigate = useNavigate();
     const [items, setItems] = useState([
@@ -73,7 +75,7 @@ export default function Form() {
             alert("Form Submitted Successfully");
             
             console.log("Form submitted successfully");
-            navigate('/');
+            navigate('/Home');
         }else{
             console.log("Opps sorry");
         }
@@ -86,7 +88,7 @@ export default function Form() {
     return (
         <>
 
-        
+<Navbar></Navbar>
         <div>
             <div className='container mt-5 mb-5 p-3 border border-dark border-3'>
 
@@ -214,7 +216,7 @@ export default function Form() {
 
             </div>
         </div >
-        
+        <Footer></Footer>
         </>
     )
 }
