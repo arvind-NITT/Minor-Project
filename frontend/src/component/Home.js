@@ -1,37 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import "./bootstrap.min.css";
 import "./style.css";
 import Timeline from './Timeline';
+import ProjectContext from '../context/Contexts';
 
-const usersData = [
-  { id: 1, fileNumber: '001', formName: 'Form A', status: 'Pending' },
-  { id: 2, fileNumber: '002', formName: 'Form B', status: 'Approved' },
-  { id: 3, fileNumber: '003', formName: 'Form C', status: 'Rejected' },
-];
-const timelineData1 = [
-  { title: 'Initialized By faculty', status: 'Processing' },
-  { title: 'HOD Approval', status: 'Success' },
-  { title: 'Dean Approval ', status: 'Pending' },
-  // Add more data as needed
-];
 export default function Home() {
+  const {
+    fetchDataFromBackend,
+    formData,
+  } = useContext(ProjectContext);
+  
   const [selectedUser, setSelectedUser] = useState(null);
-  const [timelineData, setTimelineData] = useState(null);
-
+  useEffect(() => {
+    fetchDataFromBackend();
+  }, []);
   const handleUserClick = (user) => {
     setSelectedUser(user);
-
-    // Fetch data from the backend based on fileNumber
-    // fetch(`your-backend-api-endpoint/${user.fileNumber}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-        setTimelineData(timelineData1);
-      // })
-      // .catch((error) => {
-      //   console.error('Error fetching timeline data:', error);
-      // });
+    console.log(selectedUser);
   };
-
   const divStyle = {
     minHeight: '80vh',
   };
@@ -50,11 +36,11 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            {usersData.map((user) => (
-              <tr key={user.id}>
-                <td>{user.fileNumber}</td>
-                <td>{user.formName}</td>
-                <td>{user.status}</td>
+            {formData.map((user) => (
+              <tr key={user.File_no}>
+                <td>{user.File_no}</td>
+                <td>{user.Date}</td>
+                <td>{user.send_to}</td>
                 <td>
                   <button
                     className="btn btn-primary"
@@ -75,20 +61,20 @@ export default function Home() {
               <tbody>
                 <tr>
                   <th>File Number:</th>
-                  <td>{selectedUser.fileNumber}</td>
+                  <td>{selectedUser.File_no}</td>
                 </tr>
                 <tr>
                   <th>Form Name:</th>
-                  <td>{selectedUser.formName}</td>
+                  <td>{selectedUser.Date}</td>
                 </tr>
                 <tr>
                   <th>Status:</th>
-                  <td>{selectedUser.status}</td>
+                  <td>{selectedUser.send_to}</td>
                 </tr>
                 <tr>
                   <th>View Timeline:</th>
                   <td>
-                    <Timeline data={timelineData} />
+                    <Timeline data={selectedUser} />
                   </td>
                 </tr>
                 {/* Add more details here */}
