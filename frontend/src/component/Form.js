@@ -8,6 +8,9 @@ export default function Form() {
     const [items, setItems] = useState([
         { name: '', quantity: 0, price: 0, totalCost: 0 },
     ]);
+
+
+
     const [formdata,setformdata]=useState(null);
     const handlechangeonform=(e)=>{
 
@@ -74,6 +77,8 @@ export default function Form() {
         }else{
             console.log("Opps sorry");
         }
+
+        
 
     } 
       
