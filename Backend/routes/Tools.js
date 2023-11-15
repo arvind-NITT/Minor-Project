@@ -21,7 +21,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
   console.log("In form submittion....")
    let user=req.user.found.id;
   let { Items ,name,department, Approvedby,Date,send_to}= req.body;
-  // console.log(req.body);
+  console.log(req.body);
    
 
   const File_id = await File_Number.find();  
@@ -103,7 +103,10 @@ router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
   });
 router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
-    const{ Role, Department}=req.body;
+    let user=req.user.found.id;
+    const usersdetails= await Form1.find({ user:user})
+    console.log(usersdetails);
+    const{ Role, Department}=usersdetails[0];
     // const AllForms = await Form1.find({ user: req.user.found.id });
     // const
     const Level1Forms= await Level1.find({Role:Role,Department:Department});
