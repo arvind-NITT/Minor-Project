@@ -217,14 +217,13 @@ router.post("/login",
       {
         return res.status(400).json({message:"Invalid Credentials"});
       }
-      // const data ={
-      //   found:{
-      //         id:found.id
-      //       }
-      //     }
-      //     console.log(data);
-      const jwqt = jwt.sign(
-        {id:found.id, Name: found.name, Role:found.Role,Department:found.Department },jWT_SECRETE_CODE);
+      const data ={
+        found:{
+              id:found.id
+            }
+          }
+          console.log(data);
+      const jwqt = jwt.sign(data, jWT_SECRETE_CODE);
       console.log({'authtoken':jwqt})
       // .then(user => res.json(user)).catch(err=>{res.json({error:"This Email is already taken"})}) ;
     success=true;

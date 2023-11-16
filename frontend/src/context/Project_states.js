@@ -81,10 +81,10 @@ export default function Project_states(props) {
           "Access-Control-Allow-Origin": "*",
           "auth-token": localStorage.getItem("token"),
         },
-        body:{
-          "Role":"HOD",
-          "Department":"CA",
-        },
+        // body:{
+        //   "Role":"HOD",
+        //   "Department":"CA",
+        // },
       });
       if(response.ok){
         const data = await response.json();

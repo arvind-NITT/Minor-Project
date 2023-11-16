@@ -20,7 +20,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
    let user=req.user.found.id;
   let { Items ,name,department, Approvedby,Date,send_to}= req.body;
   console.log(req.body);
-   
+    
 
   const File_id = await File_Number.find();  
   console.log(File_id);
@@ -101,15 +101,17 @@ router.get("/FetchFormsforlevel0", AuthenticateUser, async (req, res) => {
   });
 router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
-    let user=req.user.found.id;
-    const usersdetails= await Form1.find({ user:user})
-    console.log(usersdetails);
+    console.log("FetchFormsforlevel1");
+    let user=req.user.found.id; 
+    console.log(user);
+    const usersdetails= await User.find({ _id:req.user.found.id})
+    // console.log(usersdetails);
     const{ Role, Department}=usersdetails[0];
     // const AllForms = await Form1.find({ user: req.user.found.id });
     // const
-    // const Level1Forms= await Level1.find({Role:Role,Department:Department});
+    const Level1Forms= await Level1.find({Role:Role,Department:Department});
     // // console.log(AllForms);
-    // console.log(Level1Forms);
+    console.log(Level1Forms);
 
     res.send({usersdetails});
   });
