@@ -217,6 +217,22 @@ router.post("/login",
       {
         return res.status(400).json({message:"Invalid Credentials"});
       }
+      // const data ={
+      //   found:{
+      //         id:found.id
+      //       }
+      //     }
+      //     console.log(data);
+      console.log(found);
+      const data = {
+        found: {
+          id: found.id,
+          name: found.name, // Add the 'name' field
+          department: found.Department, // Add the 'department' field
+          role: found.Role, // Add the 'role' field
+        },
+      };
+      const jwqt = jwt.sign(data,jWT_SECRETE_CODE);
       const data ={
         found:{
               id:found.id

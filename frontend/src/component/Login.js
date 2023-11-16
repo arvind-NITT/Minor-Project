@@ -2,7 +2,8 @@ import React,{useContext, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import ProjectContext from '../context/Contexts';
 import { Link,Outlet } from 'react-router-dom';
-import Style from './Styles1.css'
+import Style from './Styles1.css';
+import { jwtDecode } from 'jwt-decode';
 export default function Login() {
   const context= useContext(ProjectContext);  
   const { showAlert,username,setusername}=context;
@@ -84,11 +85,16 @@ export default function Login() {
     if(token.success===true)
     {
       localStorage.setItem('token',token.authtoken);
-
+      const userinfo = jwtDecode(localStorage.getItem("token"));
       setusername(user.email) 
       console.log("success hora h ");
       console.log(token);
-      navigate('/',{replace:true}); 
+      console.log("decode kra h mene ",userinfo.found.role);
+      if(userinfo.found.role==="HOD") {
+        navigate('/hodhome',{replace:true});
+      }else{
+      navigate('/Home',{replace:true});
+      } 
       showAlert("Login SuccessFully","success");
     }else{
       console.log("danger error")

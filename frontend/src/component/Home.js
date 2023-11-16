@@ -3,7 +3,8 @@ import "./bootstrap.min.css";
 import "./style.css";
 import Timeline from './Timeline';
 import ProjectContext from '../context/Contexts';
-
+import Navbar from './Navbar';
+import Footer from './Footer';
 export default function Home() {
   const {
     fetchDataFromBackend,
@@ -28,6 +29,8 @@ export default function Home() {
   };
 
   return (
+    <>
+    <Navbar></Navbar>
     <div style={divStyle}>
       <div className='container mt-5 mb-5 p-3 border border-dark border-3'>
         <h1>Status</h1>
@@ -89,6 +92,8 @@ export default function Home() {
         )}
       </div>
     </div>
+    <Footer></Footer>
+    </>
   );
 }
 
