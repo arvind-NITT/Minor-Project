@@ -7,22 +7,22 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 export default function Hod_Home() {
   const {
-    fetchHodData,
+    fetchHodData,hodData,
   } = useContext(ProjectContext);
   
-//   const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   useEffect(() => {
     fetchHodData();
   }, []);
-//   const handleUserClick = (user) => {
-//     setSelectedUser(user);
-//     console.log(selectedUser);
-//   };
-//   const getStatus = (selectedUser) => {
-//    if(selectedUser.Approved0 && selectedUser.Approved1)
-//    return "Approved" 
-//     return "Pending"; // Default to 'No Status' if status is not available
-//   };
+  const handleUserClick = (user) => {
+    setSelectedUser(user);
+    console.log(selectedUser);
+  };
+  const getStatus = (selectedUser) => {
+   if(selectedUser.Approved)
+   return "Approved" 
+    return "Pending"; // Default to 'No Status' if status is not available
+  };
   const divStyle = {
     minHeight: '80vh',
   };
@@ -43,7 +43,7 @@ export default function Hod_Home() {
             </tr>
           </thead>
           <tbody>
-            {/* {formData.map((user) => (
+            {hodData.map((user) => (
               <tr key={user.File_no}>
                 <td>{user.File_no}</td>
                 <td>{user.Date}</td>
@@ -55,13 +55,15 @@ export default function Hod_Home() {
                   >
                     View Details
                   </button>
+            
+
                 </td>
               </tr>
-            ))}  */}
+            ))}  
           </tbody>
         </table>
         
-        {/* {selectedUser && (
+        {selectedUser && (
           <div className="mt-4">
             <h2>User Details</h2>
             <table className="table table-bordered">
@@ -71,25 +73,25 @@ export default function Hod_Home() {
                   <td>{selectedUser.File_no}</td>
                 </tr>
                 <tr>
-                  <th>Form Name:</th>
+                  <th>Form Date:</th>
                   <td>{selectedUser.Date}</td>
                 </tr>
                 <tr>
                   <th>Status:</th>
                   <td>{getStatus(selectedUser)}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <th>View Timeline:</th>
                   <td>
                     <Timeline data={selectedUser} />
                   </td>
-                </tr>
+                </tr> */}
                 {/* Add more details here */}
-              {/* </tbody>
+              </tbody>
             </table>
           </div>
         )} 
-     */}
+    
       </div>
     </div>
     <Footer></Footer>
