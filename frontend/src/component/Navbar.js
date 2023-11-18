@@ -7,7 +7,6 @@ export default function Navbar() {
     const tk= localStorage.getItem('token');
     const logout=()=>{ 
         localStorage.removeItem('token');
-         
     }
     return (
         <div>

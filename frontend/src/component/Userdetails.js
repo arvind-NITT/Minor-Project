@@ -115,6 +115,7 @@ export default  function UserDetailsPage({ selectedUser }){
     </div>
   );
 };
+<<<<<<< HEAD
 
 
 //   const history = ;
@@ -162,3 +163,6 @@ export default  function UserDetailsPage({ selectedUser }){
 // };
 
 // export default Userdetails;
+=======
+export default Userdetails;
+>>>>>>> eca3f5aafde939ac7dfc30eb7504f2d60529f6a9
