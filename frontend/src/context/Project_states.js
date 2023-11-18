@@ -91,16 +91,14 @@ export default function Project_states(props) {
         const data = await response.json();
         console.log(data);
         let i=0;
-        // let formattedData = data.AllForms.map((form) => ({
-        //   Date: form.Date,
-        //   File_no: form.File_no,
-        //   send_to: form.send_to,
-        //   Approved0:data.fromapp[i][0].Approved0,
-        //   Approved1:data.fromapp[i][0].Approved1,
-        //   Approved2:data.fromapp[i++][0].Approved2,
-        // }));
-        // setHodData(formattedData);
-        // console.log(formattedData);
+        let formattedData = data.Level1Forms.map((form) => ({
+          Date: form.date,
+          File_no: form.fileid,
+          Approved:form.Approved,
+          FormId:form.FormId,
+        }));
+        setHodData(formattedData);
+        console.log(formattedData);
       }
       else {
         showAlert("Failed to fetch data from the backend", "error");
@@ -156,6 +154,7 @@ export default function Project_states(props) {
         fetchDataFromBackend,
         fetchHodData,
         timeline,
+        hodData,
         setTimeline,
         setFormData,
         formData, // Provide the formData in the context
