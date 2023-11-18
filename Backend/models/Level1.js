@@ -9,7 +9,7 @@ const Level_1 = new Schema({
     type: mongoose.Schema.Types.ObjectId,
      ref:'Form1'
   },
-  fileid:Number,
+  fileid:String,
   Approved:Boolean,
   date:String,
 });
