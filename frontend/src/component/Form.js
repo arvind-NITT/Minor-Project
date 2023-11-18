@@ -202,10 +202,7 @@ export default function Form() {
 
 
 
-                            {/* <div class="form-group">
-                                <label for="textAreaRemark">Notes</label>
-                                <textarea class="form-control" name="remark" id="textAreaRemark" rows="2" placeholder="Tell us you want more..."></textarea>
-                            </div> */}
+                            
 
                             <button class="btn btn-success btn-block col-lg-2" type="submit" >Submit</button>
 
