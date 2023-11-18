@@ -63,7 +63,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     Role:send_to,
     Department:department, 
     FormId:result._id,
-    fileid:count,
+    fileid:fileno,
     Approved:false,
     date:Date,
    })
@@ -117,8 +117,6 @@ router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     const Level1Forms= await Level1.find({Role:Role,Department:Department});
     // // console.log(AllForms);
     console.log(Level1Forms);
-
-
     res.send({Level1Forms});
   });
 router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
