@@ -64,7 +64,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     Approved:false,
    })
    let id=File_id[0]._id;
-   let data= await File_Number.findOneAndUpdate({_id:id},{$set :{File_no:1+count}},{new:true});
+   let data= await File_Number.findOneAndUpdate({_id:id},{$set :{File_no:count}},{new:true});
    console.log(data);
    await newlevel1.save();
    console.log("form save ho gaya");
@@ -132,7 +132,7 @@ router.put("/approved/level1", AuthenticateUser,async (req,res)=>{
   if(!Level1Forms){
     res.json({"error":"Form not Found"});
   }else{ 
-     let data= await Level1.findOneAndUpdate({FormId:FormId},{$set :{Approvedby:true}},{new:true});
+     let data= await Level1.findOneAndUpdate({FormId:FormId},{$set :{Approved:true}},{new:true});
      res.json({data});
   } 
 })  
