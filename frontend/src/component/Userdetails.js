@@ -44,5 +44,4 @@ const UserDetailsPage = ({ selectedUser }) => {
     </div>
   );
 };
-
 export default Userdetails;

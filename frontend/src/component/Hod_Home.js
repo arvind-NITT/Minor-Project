@@ -55,14 +55,11 @@ export default function Hod_Home() {
                   >
                     View Details
                   </button>
-            
-
                 </td>
               </tr>
             ))}  
           </tbody>
-        </table>
-        
+        </table>  
         {selectedUser && (
           <div className="mt-4">
             <h2>User Details</h2>
