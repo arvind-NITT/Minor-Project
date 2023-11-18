@@ -68,7 +68,6 @@ export default function Project_states(props) {
       message: message,
       type: type,
     });
-
     setTimeout(() => {
       setAlert(null);
     }, 2000);

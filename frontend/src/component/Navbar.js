@@ -4,6 +4,7 @@ import "./style.css";
 import logo from "../images/NITT_logo.png";
 import { Link } from 'react-router-dom';
 export default function Navbar() {
+    const tk= localStorage.getItem('token');
     const logout=()=>{ 
         localStorage.removeItem('token');
          
@@ -39,8 +40,8 @@ export default function Navbar() {
                                 </div>
                             </div>
                             <a href="/Home" className="nav-item nav-link">Contact</a>
-                            <Link to="/login" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">login<i className="bi bi-arrow-right"></i></Link>
-                            <Link className='nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block' to='/login' onClick={logout}>Logout</Link>
+                         { !tk &&   <Link to="/login" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">login<i className="bi bi-arrow-right"></i></Link>}
+                          { tk &&  <Link className='nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block' to='/login' onClick={logout}>Logout</Link>}
                         </div>
                     </div>
                 </nav>
