@@ -9,7 +9,9 @@ const Level_1 = new Schema({
     type: mongoose.Schema.Types.ObjectId,
      ref:'Form1'
   },
-  Approved:Boolean
+  fileid:Number,
+  Approved:Boolean,
+  date:String,
 });
 const Level1 = mongoose.model('Level_1',Level_1);
   

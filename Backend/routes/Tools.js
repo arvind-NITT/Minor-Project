@@ -12,6 +12,7 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+// const Form_1 = require("../models/Form1");
 const jWT_SECRETE_CODE = "fINALLY WE CALL FROM COLLEGE";
 const ObjectId = mongoose.Types.ObjectId;
 const File_no="CA2023";
@@ -57,15 +58,19 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
    }
    
    await newtimeline.save();
+
    let newlevel1= new Level1({
     Role:send_to,
     Department:department, 
     FormId:result._id,
+    fileid:count,
     Approved:false,
+    date:Date,
    })
    let id=File_id[0]._id;
    let data= await File_Number.findOneAndUpdate({_id:id},{$set :{File_no:count}},{new:true});
    console.log(data);
+
    await newlevel1.save();
    console.log("form save ho gaya");
     res.json({success:true})
@@ -112,7 +117,25 @@ router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
     const Level1Forms= await Level1.find({Role:Role,Department:Department});
     // // console.log(AllForms);
     console.log(Level1Forms);
-    
+
+
+    res.send({Level1Forms});
+  });
+router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
+    // const username=  await User.find()
+    console.log("FetchFormsforlevel1user");
+    let user=req.user.found.id; 
+    console.log(user);
+    const {formid}= req.body;
+    // const usersdetails= await User.find({ _id:req.user.found.id})
+    // // console.log(usersdetails);
+    // const{ Role, Department}=usersdetails[0];
+    // const AllForms = await Form1.find({ user: req.user.found.id });
+    // const
+    const Level1Forms= await Form1.find({_id:formid});
+    // // console.log(AllForms);
+    console.log(Level1Forms);
+
 
     res.send({Level1Forms});
   });
@@ -136,7 +159,8 @@ router.put("/approved/level1", AuthenticateUser,async (req,res)=>{
      let data= await Level1.findOneAndUpdate({FormId:FormId},{$set :{Approved:true}},{new:true});
      res.json({data});
   } 
-})  
+})
+
  
 
 module.exports = router;
