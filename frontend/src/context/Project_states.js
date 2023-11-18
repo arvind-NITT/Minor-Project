@@ -108,6 +108,7 @@ export default function Project_states(props) {
           "auth-token": localStorage.getItem("token"),
         },
       });
+      
       console.log(response);
       if (response.ok) {
         const data = await response.json();
