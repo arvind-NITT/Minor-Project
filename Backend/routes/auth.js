@@ -233,6 +233,13 @@ router.post("/login",
         },
       };
       const jwqt = jwt.sign(data,jWT_SECRETE_CODE);
+      const data ={
+        found:{
+              id:found.id
+            }
+          }
+          console.log(data);
+      const jwqt = jwt.sign(data, jWT_SECRETE_CODE);
       console.log({'authtoken':jwqt})
       // .then(user => res.json(user)).catch(err=>{res.json({error:"This Email is already taken"})}) ;
     success=true;
