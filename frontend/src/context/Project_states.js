@@ -144,6 +144,20 @@ export default function Project_states(props) {
       showAlert("An error occurred while fetching data", "error");
     }
   };
+  const formdataforlevel1= async (fileno)=>{
+    const Url_to_formdataforlevel1 = 'http://localhost:5000/api/tools/FetchFormsforlevel1user'
+    const response = await fetch(Url_to_formdataforlevel1, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify( {fileno:fileno} ),
+    })
+    // console.log(user);
+    const formdata = await response.json();
+    
+  }
 
   return (
     <ProjectContext.Provider
