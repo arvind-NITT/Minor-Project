@@ -68,7 +68,7 @@ export default function Form() {
             "Access-Control-Allow-Origin": "*",
             'auth-token':localStorage.getItem('token'),
           },
-          body: JSON.stringify( {name:formdata.name,department:items.department ,Items:items,Date:realdate,send_to:formdata.sendto} ),
+          body: JSON.stringify( {name:formdata.name,department:formdata.department ,Items:items,Date:realdate,send_to:formdata.sendto} ),
         })
         const token = await response.json();
         if(token.success==true){
