@@ -60,6 +60,7 @@ export default function Project_states(props) {
   const [username, setusername] = useState("");
   const [alert, setAlert] = useState(null);
   const [formData, setFormData] = useState([]);
+  const [hodData,setHodData]=useState([]);
    // State to store form data
   const [timeline, setTimeline] = useState([]);
   const showAlert = (message, type) => {
@@ -90,17 +91,16 @@ export default function Project_states(props) {
         const data = await response.json();
         console.log(data);
         let i=0;
-        let formattedData = data.AllForms.map((form) => ({
-          Date: form.Date,
-          File_no: form.File_no,
-          send_to: form.send_to,
-          Approved0:data.fromapp[i][0].Approved0,
-          Approved1:data.fromapp[i][0].Approved1,
-          Approved2:data.fromapp[i++][0].Approved2,
-        }));
-        setFormData(formattedData);
-
-        console.log(formData);
+        // let formattedData = data.AllForms.map((form) => ({
+        //   Date: form.Date,
+        //   File_no: form.File_no,
+        //   send_to: form.send_to,
+        //   Approved0:data.fromapp[i][0].Approved0,
+        //   Approved1:data.fromapp[i][0].Approved1,
+        //   Approved2:data.fromapp[i++][0].Approved2,
+        // }));
+        // setHodData(formattedData);
+        // console.log(formattedData);
       }
       else {
         showAlert("Failed to fetch data from the backend", "error");

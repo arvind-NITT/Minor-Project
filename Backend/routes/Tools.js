@@ -26,7 +26,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
   const File_id = await File_Number.find();  
   console.log(File_id);
   let count=File_id[0].File_no + 1;
-   let fileno=  "NITTCA2023_" + count ;
+  let fileno=  "NITTCA2023_" + count ;
   //  console.log(Items);
   let newform= new Form1({
     File_no:fileno,
@@ -63,7 +63,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     Role:send_to,
     Department:department, 
     FormId:result._id,
-    fileid:count,
+    fileid:fileno,
     Approved:false,
     date:Date,
    })
