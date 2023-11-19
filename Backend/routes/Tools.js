@@ -122,20 +122,19 @@ router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
 router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     console.log("FetchFormsforlevel1user");
-    let user=req.user.found.id; 
-    console.log(user);
-    const {formid}= req.body;
-    // const usersdetails= await User.find({ _id:req.user.found.id})
-    // // console.log(usersdetails);
-    // const{ Role, Department}=usersdetails[0];
-    // const AllForms = await Form1.find({ user: req.user.found.id });
-    // const
-    const Level1Forms= await Form1.find({_id:formid});
-    // // console.log(AllForms);
+    const {formid}= req.body; 
+
+    const Level0Forms= await Form1.find({_id:formid});
+    const Level1Forms= await Level1.find({FormId:formid});
     console.log(Level1Forms);
+    const formitems= await Item.find({FormId:formid});
+    const formtimeline= await Timeline.find({FormId:formid});
+    const formuser= await User.find({_id:Level1Forms[0].user});
+
+    // console.log(Level1Forms);
 
 
-    res.send({Level1Forms});
+    res.send({Level1Forms,formuser,formtimeline,formitems,Level0Forms});
   });
 router.put("/approved/level0", AuthenticateUser,async (req,res)=>{
   const {Role,Department,FormId}= req.body;

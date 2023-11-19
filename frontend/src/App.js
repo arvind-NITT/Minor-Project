@@ -13,6 +13,7 @@ import Project_states from './context/Project_states';
 import Alert from './component/Alert';
 import Hod_Home from './component/Hod_Home';
 import Protected, {Public, Admin, HOD } from "./middleware/route";
+import UserDetailsPage from './component/Userdetails';
 function App() {
   return (
     <>
@@ -35,6 +36,7 @@ function App() {
       <Route exact path="/form1_l2" element={<Protected><Form1_l2 /></Protected>} />
       <Route exact path="/form2_l2" element={<Protected><Form2_l2 /></Protected>}/>
       <Route exact path="/login" element={<Login/>} />
+      <Route exact path="/UserDetails" element={<UserDetailsPage/>} />
       <Route exact path="/verifyOtp" element={<VerifyOtp/>} />
        {/* Add the '/form' route */}
     </Routes>

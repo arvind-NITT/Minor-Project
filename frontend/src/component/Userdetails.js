@@ -1,5 +1,20 @@
-import React from 'react';
-export default  function UserDetailsPage({ selectedUser }){
+import React, { useState, useEffect,useContext } from 'react';
+import "./bootstrap.min.css";
+import "./style.css";
+import Timeline from './Timeline';
+import ProjectContext from '../context/Contexts';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+
+
+export default  function UserDetailsPage(){
+  
+  const navigate = useNavigate()
+  const {
+    IndividualFormData
+  } = useContext(ProjectContext);
+  
+  
   const initialFormData = {
     Department: 'Computer Application',
     SendTo: 'HOD',
@@ -14,9 +29,11 @@ export default  function UserDetailsPage({ selectedUser }){
   
 
   return (
+    <>
+        <Navbar></Navbar>
     <div className="container mt-5 mb-5 p-3 border border-dark border-3">
       <div className="text-center pt-5">
-        <img src={logo} alt="network-logo" width="72" height="72" />
+        {/* <img src={logo} alt="network-logo" width="72" height="72" /> */}
         <h2>ADMINISTRATIVE AND FINANCIAL APPROVAL </h2>
         <p>
           Administrative approval and financial approval may kindly be accorded for the purchase of the following equipment / items.
@@ -113,56 +130,8 @@ export default  function UserDetailsPage({ selectedUser }){
         </div>
       </div>
     </div>
+    </>
   );
 };
-<<<<<<< HEAD
-
-
-//   const history = ;
-
-//   const handleApproval = () => {
-    
-    
-//   };
-
-//   const handleRejection = () => {
-    
-    
-//   };
-
-//   return (
-//     <div>
-//       <h2>User Details</h2>
-//       <table className="table table-bordered">
-//         <tbody>
-//           <tr>
-//             <th>File Number:</th>
-//             <td>{selectedUser.File_no}</td>
-//           </tr>
-//           <tr>
-//             <th>Form Name:</th>
-//             <td>{selectedUser.Date}</td>
-//           </tr>
-//           <tr>
-//             <th>Status:</th>
-//             <td>{selectedUser.}</td>
-//           </tr>
-//           {/* Add more details as needed */}
-//         </tbody>
-//       </table>
-
-//       {/* Buttons for approval and rejection */}
-//       <button className="btn btn-success" onClick={handleApproval}>
-//         Approve
-//       </button>
-//       <button className="btn btn-danger" onClick={handleRejection}>
-//         Reject
-//       </button>
-//     </div>
-//   );
-// };
 
 // export default Userdetails;
-=======
-export default Userdetails;
->>>>>>> eca3f5aafde939ac7dfc30eb7504f2d60529f6a9
