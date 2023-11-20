@@ -5,6 +5,7 @@ import Timeline from './Timeline';
 import ProjectContext from '../context/Contexts';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 export default function Home() {
   const {
     fetchDataFromBackend,
@@ -18,6 +19,23 @@ export default function Home() {
   const handleUserClick = (user) => {
     setSelectedUser(user);
     console.log(selectedUser);
+  };
+  const navigate = useNavigate()
+  const {
+    fetchHodData,hodData,formdataforlevel1
+  } = useContext(ProjectContext);
+  
+  const [selectedUser1, setSelectedUser1] = useState(null);
+  useEffect(() => {
+    fetchHodData();
+    // fetchDataFromBackend();
+  }, []);
+  const handleUserClick1 = (user) => {
+    setSelectedUser1(user);
+    console.log(user.FormId);
+    formdataforlevel1(user.FormId);
+    console.log(selectedUser1);
+    navigate('/UserDetails',{replace:true});
   };
   const getStatus = (selectedUser) => {
    if(selectedUser.Approved0 && selectedUser.Approved1)
@@ -44,6 +62,7 @@ export default function Home() {
               <th>Form Name</th>
               <th>Status</th>
               <th>Actions</th>
+              <th>View Form</th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +75,14 @@ export default function Home() {
                   <button
                     className="btn btn-primary"
                     onClick={() => handleUserClick(user)}
+                  >
+                    View Details
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleUserClick1(user)}
                   >
                     View Details
                   </button>
