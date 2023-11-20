@@ -42,7 +42,9 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     FormId: result._id,
     Approved0:true,
     Approved1:false,
-    Approved2:false
+    Approved2:false,
+    Rejected1:false,
+    Rejected2:false
    })
    for(let i =0 ;i<Items.length;i++){
                let newitem= new Item({
@@ -65,6 +67,7 @@ router.post("/submitform",AuthenticateUser,async (req, res) => {
     FormId:result._id,
     fileid:fileno,
     Approved:false,
+    Reject:false,
     date:Date,
    })
    let id=File_id[0]._id;
@@ -122,20 +125,19 @@ router.get("/FetchFormsforlevel1", AuthenticateUser, async (req, res) => {
 router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     console.log("FetchFormsforlevel1user");
-    let user=req.user.found.id; 
-    console.log(user);
-    const {formid}= req.body;
-    // const usersdetails= await User.find({ _id:req.user.found.id})
-    // // console.log(usersdetails);
-    // const{ Role, Department}=usersdetails[0];
-    // const AllForms = await Form1.find({ user: req.user.found.id });
-    // const
-    const Level1Forms= await Form1.find({_id:formid});
-    // // console.log(AllForms);
+    const {FormId}= req.body; 
+  console.log(FormId)
+    const Level0Forms= await Form1.find({_id:FormId});
+    const Level1Forms= await Level1.find({FormId:FormId});
     console.log(Level1Forms);
+    const formitems= await Item.find({FormId:FormId});
+    const formtimeline= await Timeline.find({FormId:FormId});
+    // const formuser= await User.find({_id:Level0Forms[0].user});
+
+    // console.log(Level1Forms);
 
 
-    res.send({Level1Forms});
+    res.send({Level1Forms,formtimeline,formitems,Level0Forms});
   });
 router.put("/approved/level0", AuthenticateUser,async (req,res)=>{
   const {Role,Department,FormId}= req.body;
@@ -149,13 +151,28 @@ router.put("/approved/level0", AuthenticateUser,async (req,res)=>{
 
 })
 router.put("/approved/level1", AuthenticateUser,async (req,res)=>{
-  const {Role,Department,FormId}= req.body;
-  let Level1Forms= await Level1.find({Role:Role,Department:Department});
+  const {FormId}= req.body;
+  let Level1Forms= await Level1.find({FormId});
   if(!Level1Forms){
     res.json({"error":"Form not Found"});
   }else{ 
-     let data= await Level1.findOneAndUpdate({FormId:FormId},{$set :{Approved:true}},{new:true});
-     res.json({data});
+     await Level1.findOneAndUpdate({FormId:FormId},{$set :{Approved:true}},{new:true});
+     let timeline= await Timeline.findOneAndUpdate({FormId:FormId},{$set :{Approved1:true}},{new:true})
+     console.log(timeline)
+     res.json({timeline});
+  } 
+})
+router.put("/reject/level1", AuthenticateUser,async (req,res)=>{
+  const {FormId}= req.body;
+  let Level1Forms= await Level1.find({FormId});
+  if(!Level1Forms){
+    res.json({"error":"Form not Found"});
+  }
+  else{ 
+    await Level1.findOneAndUpdate({FormId:FormId},{$set :{Reject:true}},{new:true});
+     let timeline= await Timeline.findOneAndUpdate({FormId:FormId},{$set :{Rejected1:true}},{new:true})
+     console.log(timeline);
+     res.json({timeline}); 
   } 
 })
 

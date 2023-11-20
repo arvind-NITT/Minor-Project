@@ -11,6 +11,7 @@ const Level_1 = new Schema({
   },
   fileid:String,
   Approved:Boolean,
+  Reject:Boolean,
   date:String,
 });
 const Level1 = mongoose.model('Level_1',Level_1);

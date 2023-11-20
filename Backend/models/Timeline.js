@@ -10,6 +10,8 @@ const timeline = new Schema({
   Approved0:Boolean,
   Approved1:Boolean,
   Approved2:Boolean,
+  Rejected1:Boolean,
+  Rejected2:Boolean
 });
 const Timeline = mongoose.model('timeline',timeline);
   

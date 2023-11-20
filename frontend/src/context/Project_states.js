@@ -63,6 +63,7 @@ export default function Project_states(props) {
   const [hodData,setHodData]=useState([]);
    // State to store form data
   const [timeline, setTimeline] = useState([]);
+  const [IndividualFormData, setIndividualFormData] = useState([]);
   const showAlert = (message, type) => {
     setAlert({
       message: message,
@@ -150,13 +151,46 @@ export default function Project_states(props) {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify( {fileno:fileno} ),
+      body: JSON.stringify( {FormId:fileno} ),
     })
     // console.log(user);
     const formdata = await response.json();
-    
+    console.log(formdata);
+    setIndividualFormData(formdata);
+
+  }
+  const handleApproval=async(FormId)=>{
+    const Url_to_formdataforlevel1 = 'http://localhost:5000/api/tools/approved/level1'
+    const response = await fetch(Url_to_formdataforlevel1, {
+      method: 'PUT', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify( {FormId:FormId} ),
+    })
+    // console.log(user);
+    const formdata = await response.json();
+    console.log(formdata);
+  }
+  const handleRejection=async(FormId)=>{
+    const Url_to_formdataforlevel1 = 'http://localhost:5000/api/tools/reject/level1'
+    const response = await fetch(Url_to_formdataforlevel1, {
+      method: 'PUT', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify( {FormId:FormId} ),
+    })
+    // console.log(user);
+    const formdata = await response.json();
+    console.log(formdata);
   }
 
   return (
@@ -173,6 +207,10 @@ export default function Project_states(props) {
         formData, // Provide the formData in the context
         showAlert,
         alert,
+        IndividualFormData,
+        formdataforlevel1,
+        handleApproval,
+        handleRejection
       }}
     >
       {props.children}

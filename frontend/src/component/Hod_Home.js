@@ -3,20 +3,27 @@ import "./bootstrap.min.css";
 import "./style.css";
 import Timeline from './Timeline';
 import ProjectContext from '../context/Contexts';
+import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 export default function Hod_Home() {
+  const navigate = useNavigate()
   const {
-    fetchHodData,hodData,
+    fetchHodData,hodData,formdataforlevel1,fetchDataFromBackend
   } = useContext(ProjectContext);
   
   const [selectedUser, setSelectedUser] = useState(null);
   useEffect(() => {
     fetchHodData();
+    fetchDataFromBackend();
   }, []);
   const handleUserClick = (user) => {
     setSelectedUser(user);
+    console.log(user.FormId);
+    formdataforlevel1(user.FormId);
     console.log(selectedUser);
+    navigate('/UserDetails',{replace:true});
   };
   const getStatus = (selectedUser) => {
    if(selectedUser.Approved)
