@@ -129,6 +129,12 @@ export default  function UserDetailsPage(){
           </form>
         </div>
       </div>
+      <button className="btn btn-success" onClick={handleApproval}>
+      Approve
+    </button>
+     <button className="btn btn-danger" onClick={handleRejection}>
+               Reject
+      </button>
     </div>
     </>
   );
