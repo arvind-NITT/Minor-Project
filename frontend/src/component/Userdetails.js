@@ -33,6 +33,8 @@ export default  function UserDetailsPage(){
   
   
 
+  
+
   return (
     <>
         <Navbar></Navbar>

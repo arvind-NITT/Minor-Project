@@ -11,7 +11,7 @@ export default function Home() {
     fetchDataFromBackend,
     formData,
   } = useContext(ProjectContext);
-  
+  console.log(formData);
   const [selectedUser, setSelectedUser] = useState(null);
   useEffect(() => {
     fetchDataFromBackend();
@@ -32,8 +32,8 @@ export default function Home() {
   }, []);
   const handleUserClick1 = (user) => {
     setSelectedUser1(user);
-    console.log(user.FormId);
-    formdataforlevel1(user.FormId);
+    console.log(selectedUser.user.File_no);
+    formdataforlevel1(selectedUser.File_no);
     console.log(selectedUser1);
     let timer = setTimeout(()=>{
         
