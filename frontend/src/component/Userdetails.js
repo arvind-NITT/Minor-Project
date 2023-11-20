@@ -14,18 +14,21 @@ export default  function UserDetailsPage(){
     IndividualFormData,handleApproval,handleRejection
   } = useContext(ProjectContext);
   
-  
+  console.log(IndividualFormData);
+  var lvl1form=IndividualFormData.Level1Forms;
+  console.log(lvl1form);
   const initialFormData = {
-    Department: 'Computer Application',
-    SendTo: 'HOD',
+    Department: lvl1form[0].Department,
+    SendTo: lvl1form[0].Role,
     Name: 'John Doe',
   };
 
   // Placeholder data for the items table, replace with actual data from your backend
-  const initialItems = [
-    { name: 'Item1', quantity: 2, price: 10, totalCost: 20 },
-    { name: 'Item2', quantity: 1, price: 15, totalCost: 15 },
-  ];
+  const initialItems = IndividualFormData.formitems;
+  // const initialItems = [
+  //   { name: 'Item1', quantity: 2, price: 10, totalCost: 20 },
+  //   { name: 'Item2', quantity: 1, price: 15, totalCost: 15 },
+  // ];
   
   
 
@@ -80,7 +83,7 @@ export default  function UserDetailsPage(){
                         <div className="form-group m-1">
                           <input
                             type="text"
-                            value={item.name}
+                            value={item.Name}
                             readOnly
                           />
                         </div>
@@ -91,7 +94,7 @@ export default  function UserDetailsPage(){
                         <div className="form-group m-1">
                           <input
                             type="number"
-                            value={item.quantity}
+                            value={item.Quantity}
                             readOnly
                           />
                         </div>
@@ -102,13 +105,13 @@ export default  function UserDetailsPage(){
                         <div className="form-group m-1">
                           <input
                             type="number"
-                            value={item.price}
+                            value={item.Cost}
                             readOnly
                           />
                         </div>
                       </div>
                     </td>
-                    <td className="table-warning">{item.totalCost}</td>
+                    <td className="table-warning">{item.Total}</td>
                     <td className="table-warning">
                       <div className="form-floating">
                         <div className="form-group m-1">
@@ -125,7 +128,7 @@ export default  function UserDetailsPage(){
 
             <hr />
             <div className="text-end">
-              <strong>Total Amount: {initialItems.reduce((total, item) => total + item.totalCost, 0)}</strong>
+              <strong>Total Amount: {initialItems.reduce((total, item) => total + item.Total, 0)}</strong>
             </div>
           </form>
         </div>

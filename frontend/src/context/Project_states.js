@@ -63,7 +63,7 @@ export default function Project_states(props) {
   const [hodData,setHodData]=useState([]);
    // State to store form data
   const [timeline, setTimeline] = useState([]);
-  const [IndividualFormData, setIndividualFormData] = useState([]);
+  const [IndividualFormData, setIndividualFormData] = useState(null);
   const showAlert = (message, type) => {
     setAlert({
       message: message,
@@ -131,7 +131,9 @@ export default function Project_states(props) {
           send_to: form.send_to,
           Approved0:data.fromapp[i][0].Approved0,
           Approved1:data.fromapp[i][0].Approved1,
-          Approved2:data.fromapp[i++][0].Approved2,
+          Approved2:data.fromapp[i][0].Approved2,
+          Rejected1:data.fromapp[i][0].Rejected1,
+          Rejected2:data.fromapp[i++][0].Rejected2,
         }));
         setFormData(formattedData);
 
@@ -146,6 +148,7 @@ export default function Project_states(props) {
     }
   };
   const formdataforlevel1= async (fileno)=>{
+    
     const Url_to_formdataforlevel1 = 'http://localhost:5000/api/tools/FetchFormsforlevel1user'
     const response = await fetch(Url_to_formdataforlevel1, {
       method: 'POST', // or 'PUT'
@@ -160,6 +163,8 @@ export default function Project_states(props) {
     const formdata = await response.json();
     console.log(formdata);
     setIndividualFormData(formdata);
+   console.log(IndividualFormData);
+
 
   }
   const handleApproval=async(FormId)=>{
