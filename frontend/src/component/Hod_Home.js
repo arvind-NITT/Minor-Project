@@ -10,17 +10,18 @@ import Footer from './Footer';
 export default function Hod_Home() {
   const navigate = useNavigate()
   const {
-    fetchHodData,hodData,formdataforlevel1,
+    fetchHodData,hodData,formdataforlevel1,fetchDataFromBackend
   } = useContext(ProjectContext);
   
   const [selectedUser, setSelectedUser] = useState(null);
   useEffect(() => {
     fetchHodData();
-    
+    fetchDataFromBackend();
   }, []);
   const handleUserClick = (user) => {
     setSelectedUser(user);
-    formdataforlevel1(user.File_no);
+    console.log(user.FormId);
+    formdataforlevel1(user.FormId);
     console.log(selectedUser);
     navigate('/UserDetails',{replace:true});
   };

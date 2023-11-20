@@ -11,7 +11,7 @@ export default  function UserDetailsPage(){
   
   const navigate = useNavigate()
   const {
-    IndividualFormData
+    IndividualFormData,handleApproval,handleRejection
   } = useContext(ProjectContext);
   
   
@@ -26,6 +26,7 @@ export default  function UserDetailsPage(){
     { name: 'Item1', quantity: 2, price: 10, totalCost: 20 },
     { name: 'Item2', quantity: 1, price: 15, totalCost: 15 },
   ];
+  
   
 
   return (
@@ -129,10 +130,10 @@ export default  function UserDetailsPage(){
           </form>
         </div>
       </div>
-      <button className="btn btn-success" onClick={handleApproval}>
+      <button className="btn btn-success" onClick={()=>{ return handleApproval(IndividualFormData.Level1Forms[0].FormId)}}>
       Approve
     </button>
-     <button className="btn btn-danger" onClick={handleRejection}>
+     <button className="btn btn-danger" onClick={()=>{ return handleRejection(IndividualFormData.Level1Forms[0].FormId)}}>
                Reject
       </button>
     </div>

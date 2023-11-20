@@ -154,13 +154,43 @@ export default function Project_states(props) {
         "auth-token": localStorage.getItem("token"),
         "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify( {fileno:fileno} ),
+      body: JSON.stringify( {FormId:fileno} ),
     })
     // console.log(user);
     const formdata = await response.json();
     console.log(formdata);
     setIndividualFormData(formdata);
 
+  }
+  const handleApproval=async(FormId)=>{
+    const Url_to_formdataforlevel1 = 'http://localhost:5000/api/tools/approved/level1'
+    const response = await fetch(Url_to_formdataforlevel1, {
+      method: 'PUT', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify( {FormId:FormId} ),
+    })
+    // console.log(user);
+    const formdata = await response.json();
+    console.log(formdata);
+  }
+  const handleRejection=async(FormId)=>{
+    const Url_to_formdataforlevel1 = 'http://localhost:5000/api/tools/reject/level1'
+    const response = await fetch(Url_to_formdataforlevel1, {
+      method: 'PUT', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem("token"),
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify( {FormId:FormId} ),
+    })
+    // console.log(user);
+    const formdata = await response.json();
+    console.log(formdata);
   }
 
   return (
@@ -179,6 +209,8 @@ export default function Project_states(props) {
         alert,
         IndividualFormData,
         formdataforlevel1,
+        handleApproval,
+        handleRejection
       }}
     >
       {props.children}
