@@ -5,7 +5,9 @@ import Timeline from './Timeline';
 import ProjectContext from '../context/Contexts';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-
+import { jwtDecode } from 'jwt-decode';
+const userinfo = jwtDecode(localStorage.getItem("token"));
+const userishod=userinfo.found.role==="HOD"?true:null
 
 export default  function UserDetailsPage(){
   
@@ -133,12 +135,12 @@ export default  function UserDetailsPage(){
           </form>
         </div>
       </div>
-      <button className="btn btn-success" onClick={()=>{ return handleApproval(IndividualFormData.Level1Forms[0].FormId)}}>
+      { userishod && <button className="btn btn-success" onClick={()=>{ return handleApproval(IndividualFormData.Level1Forms[0].FormId)}}>
       Approve
-    </button>
-     <button className="btn btn-danger" onClick={()=>{ return handleRejection(IndividualFormData.Level1Forms[0].FormId)}}>
+    </button>}
+     { userishod && <button className="btn btn-danger" onClick={()=>{ return handleRejection(IndividualFormData.Level1Forms[0].FormId)}}>
                Reject
-      </button>
+      </button>}
     </div>
     </>
   );
