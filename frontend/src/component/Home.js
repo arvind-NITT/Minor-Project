@@ -35,7 +35,11 @@ export default function Home() {
     console.log(user.FormId);
     formdataforlevel1(user.FormId);
     console.log(selectedUser1);
-    navigate('/UserDetails',{replace:true});
+    let timer = setTimeout(()=>{
+        
+      navigate('/UserDetails',{replace:true});
+        clearTimeout(timer);
+    }, 2000)
   };
 
   const getStatus = (selectedUser) => {

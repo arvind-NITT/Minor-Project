@@ -126,7 +126,7 @@ router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
     // const username=  await User.find()
     console.log("FetchFormsforlevel1user");
     const {FormId}= req.body; 
-  console.log(FormId)
+  console.log(FormId)       
     const Level0Forms= await Form1.find({_id:FormId});
     const Level1Forms= await Level1.find({FormId:FormId});
     console.log(Level0Forms);
@@ -138,7 +138,25 @@ router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
     // console.log(Level1Forms);
 
 
-    res.send({Level1Forms,formtimeline,formitems,Level0Forms});
+    res.send({Level1Forms,formtimeline,formitems,Level0Forms,formuser});
+  });
+router.post("/FetchFormsforlevel0user", AuthenticateUser, async (req, res) => {
+    // const username=  await User.find()
+    console.log("FetchFormsforlevel0user");
+    const {FormId}= req.body; 
+  console.log(FormId)
+    const Level0Forms= await Form1.find({_id:FormId});
+    const Level1Forms= await Level1.find({FormId:FormId});
+    console.log(Level0Forms);  
+    const formitems= await Item.find({FormId:FormId});
+    const formtimeline= await Timeline.find({FormId:FormId});
+    const objectId = new ObjectId(Level0Forms[0].user);
+    const formuser= await User.find({_id:objectId});
+
+    // console.log(Level1Forms);
+
+
+    res.send({Level1Forms,formtimeline,formitems,Level0Forms,formuser});
   });
 router.put("/approved/level0", AuthenticateUser,async (req,res)=>{
   const {Role,Department,FormId}= req.body;

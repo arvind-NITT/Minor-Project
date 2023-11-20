@@ -17,12 +17,11 @@ export default  function UserDetailsPage(){
   } = useContext(ProjectContext);
   
   console.log(IndividualFormData);
-  var lvl1form=IndividualFormData.Level1Forms;
-  console.log(lvl1form);
+  // var lvl1form=IndividualFormData. 
   const initialFormData = {
-    Department: lvl1form[0].Department,
-    SendTo: lvl1form[0].Role,
-    Name: 'John Doe',
+    Department: IndividualFormData.Level1Forms[0].Department,
+    SendTo: IndividualFormData.Level1Forms[0].Role,
+    Name: IndividualFormData.formuser[0].name,
   };
 
   // Placeholder data for the items table, replace with actual data from your backend

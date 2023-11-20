@@ -7,7 +7,7 @@ export default function Alert() {
   
   const { alert}=context;
   return (<>
-  { alert &&  <div className="container d-flex justify-content-center  mt-2 " style={{height :'70px',zIndex:3,position:'absolute',top:'20px',left:"180px"}}>
+  { alert &&  <div className="container d-flex justify-content-center  mt-2 " style={{height :'70px',zIndex:30,position:'absolute',top:'20px',left:"180px"}}>
        <div className={`alert alert-${alert.type} alert-dismissible fade text-center show`}  style={{width:'800px'}} role="alert">
   <strong>{alert.message}</strong>
 </div>

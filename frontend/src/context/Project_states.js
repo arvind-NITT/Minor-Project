@@ -126,6 +126,7 @@ export default function Project_states(props) {
         // Extract the relevant data from the response and format it as needed
         let i=0;
         let formattedData = data.AllForms.map((form) => ({
+          FormId:form._id,
           Date: form.Date,
           File_no: form.File_no,
           send_to: form.send_to,

@@ -10,7 +10,7 @@ import Footer from './Footer';
 export default function Hod_Home() {
   const navigate = useNavigate()
   const {
-    fetchHodData,hodData,formdataforlevel1,fetchDataFromBackend
+    fetchHodData,hodData,formdataforlevel1,fetchDataFromBackend,showAlert
   } = useContext(ProjectContext);
   
   const [selectedUser, setSelectedUser] = useState(null);
@@ -23,6 +23,7 @@ export default function Hod_Home() {
     console.log(user.FormId);
     formdataforlevel1(user.FormId);
     console.log(selectedUser);
+    showAlert("Fetching Form Please wait ....","success")
     let timer = setTimeout(()=>{
         
       navigate('/UserDetails',{replace:true});
