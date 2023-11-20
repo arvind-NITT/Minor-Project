@@ -21,7 +21,10 @@ export default function Home() {
   };
   const getStatus = (selectedUser) => {
    if(selectedUser.Approved0 && selectedUser.Approved1)
-   return "Approved" 
+   return "Approved" ;
+  if(selectedUser.Rejected1 )
+   return "Rejected" ;
+   
     return "Pending"; // Default to 'No Status' if status is not available
   };
   const divStyle = {
