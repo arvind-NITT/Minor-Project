@@ -3,8 +3,11 @@ import "./bootstrap.min.css";
 import "./style.css";
 import logo from "../images/NITT_logo.png";
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 export default function Navbar() {
     const tk= localStorage.getItem('token');
+    const userinfo = jwtDecode(localStorage.getItem("token"));
+    const userishod=userinfo.found.role==="HOD"?true:null
     const logout=()=>{ 
         localStorage.removeItem('token');
     }
@@ -22,9 +25,9 @@ export default function Navbar() {
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarCollapse">
-                        <div className="navbar-nav ms-auto py-0">
-                            <Link to="/Home" className="nav-item nav-link active">Home</Link>
+                    {!userishod &&  <div className="collapse navbar-collapse" id="navbarCollapse">
+                 <div className="navbar-nav ms-auto py-0">
+                          <Link to="/Home" className="nav-item nav-link active">Home</Link>
                             <a href="/Home" className="nav-item nav-link">About</a>
                             
                             <div className="nav-item dropdown">
@@ -39,10 +42,25 @@ export default function Navbar() {
                                 </div>
                             </div>
                             <a href="/Home" className="nav-item nav-link">Contact</a>
+    
                          { !tk &&   <Link to="/login" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">login<i className="bi bi-arrow-right"></i></Link>}
                           { tk &&  <Link className='nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block' to='/login' onClick={logout}>Logout</Link>}
                         </div>
-                    </div>
+                        
+
+                    </div>}
+                    {userishod &&  <div className="collapse navbar-collapse" id="navbarCollapse">
+                 <div className="navbar-nav ms-auto py-0">
+                          <Link to="/hodhome" className="nav-item nav-link active">Home</Link>
+                            <a href="/hodhome" className="nav-item nav-link">About</a>
+                        
+    
+                         { !tk &&   <Link to="/login" className="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block">login<i className="bi bi-arrow-right"></i></Link>}
+                          { tk &&  <Link className='nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block' to='/login' onClick={logout}>Logout</Link>}
+                        </div>
+                        
+
+                    </div>}
                 </nav>
                 </div>
 
