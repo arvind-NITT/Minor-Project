@@ -129,10 +129,11 @@ router.post("/FetchFormsforlevel1user", AuthenticateUser, async (req, res) => {
   console.log(FormId)
     const Level0Forms= await Form1.find({_id:FormId});
     const Level1Forms= await Level1.find({FormId:FormId});
-    console.log(Level1Forms);
+    console.log(Level0Forms);
     const formitems= await Item.find({FormId:FormId});
     const formtimeline= await Timeline.find({FormId:FormId});
-    // const formuser= await User.find({_id:Level0Forms[0].user});
+    const objectId = new ObjectId(Level0Forms[0].user);
+    const formuser= await User.find({_id:objectId});
 
     // console.log(Level1Forms);
 

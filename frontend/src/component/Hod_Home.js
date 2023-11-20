@@ -27,7 +27,7 @@ export default function Hod_Home() {
         
       navigate('/UserDetails',{replace:true});
         clearTimeout(timer);
-    }, 3000)
+    }, 2000)
   };
   const getStatus = (selectedUser) => {
    if(selectedUser.Approved)
