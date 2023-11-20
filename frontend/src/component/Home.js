@@ -37,6 +37,7 @@ export default function Home() {
     console.log(selectedUser1);
     navigate('/UserDetails',{replace:true});
   };
+
   const getStatus = (selectedUser) => {
    if(selectedUser.Approved0 && selectedUser.Approved1)
    return "Approved" ;
