@@ -23,7 +23,11 @@ export default function Hod_Home() {
     console.log(user.FormId);
     formdataforlevel1(user.FormId);
     console.log(selectedUser);
-    navigate('/UserDetails',{replace:true});
+    let timer = setTimeout(()=>{
+        
+      navigate('/UserDetails',{replace:true});
+        clearTimeout(timer);
+    }, 3000)
   };
   const getStatus = (selectedUser) => {
    if(selectedUser.Approved)
