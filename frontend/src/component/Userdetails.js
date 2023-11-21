@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import { jwtDecode } from 'jwt-decode';
 const userinfo = jwtDecode(localStorage.getItem("token"));
-const userishod=userinfo.found.role==="HOD"?true:null
+const userishod=userinfo?.found?.role==="HOD"?true:null
 
 export default  function UserDetailsPage(){
   
