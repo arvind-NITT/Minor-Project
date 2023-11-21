@@ -5,6 +5,7 @@ const getStatus = (title,data) => {
   // if (data.Approved1) {
   //   return "Approved";
   // } else 
+
   
   if (title=="Initiated by you") {
     if(data.Approved1) return "Approved"
